@@ -1,0 +1,229 @@
+--------------------------------------------------------------------------------
+ Adic
+ Another Dependency Injector Container
+ Copyright (c) 2014-2016 Andre "Intentor" Martins
+ http://intentor.com.br/
+--------------------------------------------------------------------------------
+
+Version 2.16.2 (2015-01-15)
+
+Context Root extension
+-  Fixed children inspector fields display of ContextRoot.
+
+Version 2.16.1 (2015-01-05)
+
+Context Root extension
+- Fixed editor ExecutionOrderUtils script location, which was preventing build generation.
+
+Version 2.16 (2015-01-05)
+
+Context Root extension
+- Added automatic MonoBehaviour injection on scenes. [Issue #37]
+- Added ContextRootEditor to include option to set script execution order of game roots. [Issue #38]
+
+Version 2.15.2 (2015-10-05)
+
+Mono Injection extension
+- Fixed singleton MonoBehaviour duplicate injection call. [Issue #35]
+
+Version 2.15.1 (2015-09-28)
+
+Framework
+- Added catch for ReflectionTypeLoadException when reading assemblies for type inspection.
+
+Version 2.15 (2015-08-24)
+
+Framework
+- Added inject parameters on PostConstructor methods. [Issue #34]
+
+Commander extension
+- Updated commands to be singleton by default. [Issue #31]
+
+Version 2.14.1 (2015-07-10)
+
+Commander extension
+- Fixed behaviours' public methods to provide a parameterless option. [Issue #28]
+
+Version 2.14 (2015-07-10)
+
+Commander extension
+- Added CommandReference type to provide a dispatchable command reference on MonoBehaviours.
+- Fixed loading of commands on components when using binaries.
+
+Mono Injection extension
+- Added InjectionUtil class to group common routines from Mono and State Injection extensions.
+
+State Injection extension
+- Added extension.
+
+Version 2.13 (2015-06-26)
+
+Framework
+- Updated type finding on namespaces to work from external DLL. [Issue #14]
+- Updated identifiers from string to objects. [Issue #27]
+
+Version 2.12 (2015-06-15)
+
+Commander extension
+- Fixed pooling when registering from an empty command list.
+
+Context Root extension
+- Updated Init() method to be called on Unity's start event.
+
+Mono Injection extension
+- Fixed injection on MonoBehaviours that contain other attributes besides InjectFromContainer.
+
+Version 2.11 (2015-05-21)
+
+Framework
+- Added Unbind() method for identifiers. [Issue #24]
+- Added use of Inject attribute on constructor parameters. [Issue #19]
+
+Commander extension
+- Added automatic command retention when invoking or starting a coroutine. [Issue #21]
+- Added stopping of coroutines when releasing commands. [Issue #21]
+- Added release of commands by type. [Issue #18]
+- Implemented IDisposable interface on the command class. [Issue #21]
+
+Context Root extension
+- Fixed new instantiation of existing container's data on Awake().
+
+Version 2.10 (2015-05-08)
+
+Framework
+- Added identifier to containers.
+- Fixed JIT compilation error when building to iOS (which compiles using AOT). [Issue #16]
+
+Commander extension
+- Added verification of already pooled commands when pooling.
+
+Mono Injection extension
+- Added InjectFromContainer attribute to select, by identifier, from which container injections should occur.
+
+Version 2.9 (2015-05-02)
+
+Framework
+- Added Adic.Binding.MultipleBindingConditionFactory for handling conditions of multiple bindings at the same time. [Issue #13]
+- Updated Adic.Binding.BindingConditionFactory to Adic.Binding.SingleBindingConditionFactory. [Issue #13]
+- Fixed instantiation of different instances for singleton bindings. [Issue #15]
+
+Commander extension
+- Added InvokeDispatch() method. [Issue #12]
+- Added Command.Invoke() method. [Issue #12]
+- Added Command.StartCoroutine() and Command.StopCoroutine() methods. [Issue #12]
+- Fixed registration attempt of abstract commands.
+
+Event Caller extension
+- Updated container extension to have a singleton instance of the Event Caller MonoBehaviour. [Issue #12]
+
+Unity Binding Extension
+- Added ToGameObjectsWithTag() method. [Issue #13]
+
+Version 2.8 (2015-04-20)
+
+Framework
+- Added chaining for bindings. [Issue #11]
+- Updated instantiations, post construct callings and field/property setters to use cached methods (up to 100% in performance gain when resolving!).
+- Updated InjectionContainer to inherit from Adic.Injector.
+
+Context Root extension
+- Added generic version of AddContainer() to make container addition less verbose.
+
+Version 2.7 (2015-04-16)
+
+Framework
+- Added manual resolution by identifier. [Issue #9]
+- Changed identifier type to string. [Issue #9]
+- Removed new() keyword form IBindingFactory.ToFactory(), given factories are now resolved by the container.
+- Fixed null reference with conditions. [Issue #10]
+
+Examples
+- Added example for factories. [Issue #8]
+- Updated comments in examples.
+- Updated organization of resources' files to avoid name crosstalk when loading resources in examples.
+
+Version 2.6 (2015-04-10)
+
+Framework
+- Added overloads to SetupBindings() method to setup bindings from namespaces. [Issue #5]
+- Added BindingPriority attribute to indicate prioritary bindings setups when using SetupBindings() with namespaces. [Issue #5]
+- Removed factoryType property from Adic.IFactory. [Issue #6]
+- Fixed comments in examples.
+
+Bindings Setup Extension
+- Added Bindings Setup example.
+
+Version 2.5 (2015-04-02)
+
+Framework
+- Added creation and injection of factories by the container. [Issue #4]
+
+Commander extension
+- Updated CommanderExtension.RegisterCommands() to use TypeUtils.GetAssignableTypesInNamespace() to get commands from the current assembly(ies).
+
+Version 2.4 (2015-04-01)
+
+Framework
+- Added methods ToNamespace() and ToNamespaceSingleton() to IBindingFactory.
+- Added method GetAssignableTypesInNamespace() to TypeUtils.
+- Updated IFactory interface to receive an InjectionContext object when creating objects. [Issue #2]
+- Removed private method IsAssignable() from BindingFactory.
+- Fixed type of parentType field in InjectionContext.
+- Fixed NullReferenceException when getting the type from a parent instance for InjectionContext.
+
+Commander extension
+- Updated name of CommanderExtensions class to CommanderExtension (doesn't affect any existing code that uses the extension).
+
+Version 2.3 (2015-03-24)
+
+Commander extension
+- Added TimedCommandDispatch and CommandDispatch components.
+- Added method ContainsRegistration() to Adic.ICommandDispatcher for checking whether a dispatcher contains a given command registration.
+- Added method GetAllRegistrations() to Adic.ICommandDispatcher to list all registered commands in a dispatcher.
+- Updated registration of commands using namespaces to find commands in children namespaces.
+
+Version 2.2 (2015-03-21)
+
+Bindings Printer Extension
+- Fixed displaying of window when no containers exist.
+
+Bindings Setup Extension
+- Added extension.
+
+Commander extension
+- Added method GetCommandDispatcher() as extension to IInjectionContainer.
+
+Unity Binding Extension
+- Added ToResource() method, which binds to any asset (not necessarily a prefab).
+- Updated error messages.
+
+Version 2.1 (2015-03-12)
+
+Framework
+- Added overloads by generics and type instance at IBindingFactory.ToFactory().
+
+Commander extension
+- Added interfaces to define command dispatchers (ICommandDispatcher) and command pools (ICommandPool).
+- Added System.IDisposable interface to the CommandDispatcher so it can release commands when the scene is destroyed.
+- Removed Dispose() method from Adic.Command. To make commands disposable, implement System.IDisposable.
+- Fixed dispose of commands that implemented System.IDisposable.
+- Fixed release of commands that implemented Adic.IUpdatable.
+- Now the Commander extension always depends on the Event Caller extension.
+
+Event Caller extension
+- Added evaluation of important disposable objects (IInjectorContainer and ICommandDispatcher) during registration to avoid the need for following a specific order when registering extensions.
+- Fixed adding duplicate objects in disposable/updateable lists.
+
+Version 2.0 (2015-03-08)
+
+- New framework architecture.
+- Added extensions.
+- Documentation expanded.
+
+Version 1.0 (2015-02-19)
+
+- Initial release.
+
+Version 0.1 (2014-08-01)
+
+- First fully functional version.

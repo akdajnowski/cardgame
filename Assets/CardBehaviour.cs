@@ -4,32 +4,29 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Adic;
 
-[ExecuteInEditMode]
 public class CardBehaviour : MonoBehaviour, IPointerClickHandler
 {
+    [Inject]
+    public CardAssetsProvider cardAssetsProvider;
+
     public CardDescriptor Card { get; private set; }
     public int Index { get; private set; }
-    private List<Sprite> _icons;
-    private Transform _cardDescription;
-    private Transform _cardAttrPrefab;
     public HandBehaviour hand;
-
-    void Start()
-    {     
-        //Card = CardRepository.DrawCard();
-    }
+    private Transform _cardDescription;
 
     public void Init(CardDescriptor card, int index)
     {
+        this.Inject();
         Card = card;
         Index = index;
-        _icons = AssetDatabase.LoadAllAssetRepresentationsAtPath("Assets/icons.png").OfType<Sprite>().ToList();
-        _cardAttrPrefab = (Transform)AssetDatabase.LoadAssetAtPath("Assets/Card Description Icon.prefab", typeof(Transform));
+     
         _cardDescription = transform.FindChild("Card Description");
 
         transform.FindChild("Text").GetComponent<Text>().text = Card.Name;
-        transform.FindChild("Image").GetComponent<Image>().sprite = GetSpriteFromPath(Card.CardImage);
+        
+        transform.FindChild("Image").GetComponent<Image>().sprite = cardAssetsProvider.GetSpriteFromPath(Card.CardImage);
 
         RemoveOldIcons();
         AddCardAttributeIcons(Card.CardAttributes);
@@ -41,22 +38,14 @@ public class CardBehaviour : MonoBehaviour, IPointerClickHandler
     {
     }
 
-    private Sprite GetSpriteForAttribute(CardAttribute.Type type)
-    {
-        return _icons.First(x => x.name == CardAttribute.IconMap[type]);
-    }
 
-    private Sprite GetSpriteFromPath(string path)
-    {
-        return _icons.First(x => x.name == path);
-    }
 
     private void AddCardAttributeIcons(List<CardAttribute> attributes)
     {
         attributes.SelectMany(s => Enumerable.Range(1, s.Quantity).Select(i => s.Quality)).ToList().ForEach(i => 
         {
-            var attributeIcon = Instantiate(_cardAttrPrefab) as Transform;
-            attributeIcon.GetComponent<Image>().sprite = GetSpriteForAttribute(i);
+            var attributeIcon = Instantiate(cardAssetsProvider.CardAttrPrefab) as Transform;
+            attributeIcon.GetComponent<Image>().sprite = cardAssetsProvider.GetSpriteForAttribute(i);
             attributeIcon.SetParent(_cardDescription, false);
         });      
     }

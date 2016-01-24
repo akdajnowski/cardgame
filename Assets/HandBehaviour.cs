@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Adic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HandBehaviour : MonoBehaviour
 {
+    [Inject]
+    public GameTracker GameTracker;
+
     public List<GameObject> cards;
     public GameObject opponentCard;
 
@@ -20,6 +24,7 @@ public class HandBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        this.Inject();
         cards = new List<GameObject>();
         cardReducer = new CardReducer();
     }
@@ -40,10 +45,11 @@ public class HandBehaviour : MonoBehaviour
                 var card = (GameObject)Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
                 // get a card
                 var cardBehaviour = card.GetComponent<CardBehaviour>();
-                cardBehaviour.Init(CardRepository.DrawCard(cards.Count), cards.Count);
+                
                 cardBehaviour.hand = this;
                 cards.Add(card);
                 card.transform.SetParent(transform);
+                cardBehaviour.Init(CardRepository.DrawCard(cards.Count - 1), cards.Count -1);
                 var cardRectTransform = (RectTransform)card.transform;
                 cardRectTransform.localPosition = Vector3.zero;
 
@@ -80,7 +86,7 @@ public class HandBehaviour : MonoBehaviour
         switch (firstPlayer)
         {
             case ActivePlayer.Player:
-                CardRepository.IsPlayerTurn = true;
+                GameTracker.IsPlayerTurn = true;
                 break;
             case ActivePlayer.Opponent:
                 OpponentTurn();
@@ -145,9 +151,9 @@ public class HandBehaviour : MonoBehaviour
 
     public void PlayCard(int index)
     {
-        if (CardRepository.IsPlayerTurn)
+        if (GameTracker.IsPlayerTurn)
         {
-            CardRepository.IsPlayerTurn = false;
+            GameTracker.IsPlayerTurn = false;
             cards[index].transform.SetParent(play.transform);
             cards[index].transform.localPosition = Vector3.zero;
             cards[index].transform.Translate(75, 110, 0);
@@ -177,7 +183,7 @@ public class HandBehaviour : MonoBehaviour
         if (firstPlayer == ActivePlayer.Opponent)
         {
             Debug.Log("Player turn");
-            CardRepository.IsPlayerTurn = true;
+            GameTracker.IsPlayerTurn = true;
         }
         else
         {
