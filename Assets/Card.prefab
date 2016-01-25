@@ -10,9 +10,9 @@ GameObject:
   - 224: {fileID: 22400818}
   - 222: {fileID: 22266752}
   - 114: {fileID: 11440806}
-  - 114: {fileID: 11423786}
-  - 114: {fileID: 11433724}
   - 225: {fileID: 22518534}
+  - 114: {fileID: 11410134}
+  - 114: {fileID: 11471436}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11423786
+--- !u!114 &11410134
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -259,10 +259,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24d6aea4c6eb495489e639b656b1b16f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b9e77e2dbac1384e80a5f4ee0e4ad1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 0}
+  animationTime: 1.75
+  ease: 27
 --- !u!114 &11425022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,19 +287,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &11433724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9e77e2dbac1384e80a5f4ee0e4ad1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationTime: 1.75
-  ease: 27
 --- !u!114 &11440806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -461,6 +449,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11471436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d6aea4c6eb495489e639b656b1b16f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
 --- !u!114 &11474190
 MonoBehaviour:
   m_ObjectHideFlags: 1
