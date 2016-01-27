@@ -2,33 +2,59 @@
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
+[RequireComponent(typeof(RectTransform))]
 public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private RectTransform rect;
     public float animationTime = 0.35f;
     public Ease ease = Ease.OutBack;
+    private Sequence sequence;
+    private RectTransform rect;
+    private Quaternion _baseRotation;
+
+    public bool HoverEnabled { get; set; }
+
+    void Start()
+    {
+        HoverEnabled = true;
+        rect = GetComponent<RectTransform>();
+        _baseRotation = rect.rotation;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DORotate(Vector3.forward * 45, animationTime).SetEase(ease);
-        transform.DOScale(1.3f, animationTime).SetEase(ease);
-        transform.SetAsLastSibling();
+        if (HoverEnabled)
+        {
+            sequence = DOTween.Sequence();
+            sequence
+              .Join(transform.DORotate(Vector3.forward, animationTime).SetEase(ease))
+              .Join(transform.DOScale(1.3f, animationTime).SetEase(ease));
+
+            transform.SetAsLastSibling();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DORotate(Vector3.forward, animationTime).SetEase(ease);
-        transform.DOScale(1f, animationTime).SetEase(ease);
+        if (HoverEnabled)
+        {
+            sequence = DOTween.Sequence();
+            sequence
+              .Join(transform.DORotateQuaternion(_baseRotation, animationTime).SetEase(ease))
+              .Join(transform.DOScale(1f, animationTime).SetEase(ease))
+              .OnComplete(() => Reset(true));
+        }
     }
 
-    void Start()
+    public void Reset(bool hoverEnabled)
     {
-        rect = GetComponent<RectTransform>();
+        HoverEnabled = hoverEnabled;
+        ResetRotationAndScale();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ResetRotationAndScale()
     {
-
+        sequence
+           .Join(transform.DORotateQuaternion(_baseRotation, animationTime))
+           .Join(transform.DOScale(1f, animationTime));
     }
 }

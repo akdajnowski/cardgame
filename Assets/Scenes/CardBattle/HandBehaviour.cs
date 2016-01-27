@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class HandBehaviour : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class HandBehaviour : MonoBehaviour
     public int indexOfCardPlayed;
     private ActivePlayer firstPlayer;
     private CardReducer cardReducer;
-    
+
 
     // Use this for initialization
     void Start()
@@ -45,22 +46,31 @@ public class HandBehaviour : MonoBehaviour
                 var card = (GameObject)Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
                 // get a card
                 var cardBehaviour = card.GetComponent<CardBehaviour>();
-                
+
                 cardBehaviour.hand = this;
                 cards.Add(card);
                 card.transform.SetParent(transform);
-                cardBehaviour.Init(CardRepository.DrawCard(cards.Count - 1), cards.Count -1);
+                cardBehaviour.Init(CardRepository.DrawCard(cards.Count - 1), cards.Count - 1);
                 var cardRectTransform = (RectTransform)card.transform;
                 cardRectTransform.localPosition = Vector3.zero;
 
-                cardRectTransform.Translate(75 + (cards.Count - 1) * 150, 190, 0);
-
+                TranslateCard(() => (cards.Count - 1), cardRectTransform);
             }
 
             DrawOponentCard();
 
             ChoosePlayer();
         }
+    }
+
+    private static void TranslateCard(Func<int> index, RectTransform cardRectTransform)
+    {
+        var l = index();
+        cardRectTransform.Translate(75 + l * 150, 190, 0);
+
+        var rotations = new int[] { 4, 2, -2, -4 };
+
+        cardRectTransform.Rotate(Vector3.forward * (rotations[l] * 5));
     }
 
     private void DrawOponentCard()
@@ -117,7 +127,7 @@ public class HandBehaviour : MonoBehaviour
     private void DrawCard(int index)
     {
         SetOpponentCardVisibility(false);
-        Transform card = GetCardWithIndex(index);
+        var card = GetCardWithIndex(index);
         var cardBehaviour = card.GetComponent<CardBehaviour>();
         Debug.Log("Kurwa znalazlem index " + cardBehaviour.Index + ", przy wejsciowym " + index);
         cardBehaviour.Init(CardRepository.DrawCard(index), index);
@@ -126,8 +136,7 @@ public class HandBehaviour : MonoBehaviour
         card.transform.SetParent(transform);
         var cardRectTransform = (RectTransform)card.transform;
         cardRectTransform.localPosition = Vector3.zero;
-
-        cardRectTransform.Translate(75 + (index) * 150, 190, 0);
+        TranslateCard(() => index, cardRectTransform);
     }
 
     private void SetOpponentCardVisibility(bool visible)
@@ -154,12 +163,18 @@ public class HandBehaviour : MonoBehaviour
         if (GameTracker.IsPlayerTurn)
         {
             GameTracker.IsPlayerTurn = false;
-            cards[index].transform.SetParent(play.transform);
-            cards[index].transform.localPosition = Vector3.zero;
-            cards[index].transform.Translate(75, 110, 0);
             indexOfCardPlayed = index;
+            StartCoroutine(MoveCardToPlayZone(cards[indexOfCardPlayed]));
             HandlePlayerAction();
         }
+    }
+
+    private IEnumerator MoveCardToPlayZone(GameObject card)
+    {
+        // we don't want to have the card hover wobbling enabled while the card is floating again
+        card.GetComponent<HoverOver>().Reset(false);
+        card.transform.SetParent(play.transform);
+        yield return card.transform.DOLocalMove(new Vector3(90, 110, 0), 0.75f).WaitForCompletion();
     }
 
     private void HandlePlayerAction()
@@ -196,10 +211,10 @@ public class HandBehaviour : MonoBehaviour
     {
         // if game not finished
         Debug.Log("napierdalamy tutaj");
-        StartCoroutine(Continue());
+        StartCoroutine(ResolveCard());
     }
 
-    private IEnumerator Continue()
+    private IEnumerator ResolveCard()
     {
         yield return new WaitForSeconds(1.75f);
         var result = cardReducer.ResolveCard(PlayerCard().GetComponent<CardBehaviour>().Card, opponentCard.GetComponent<CardBehaviour>().Card);

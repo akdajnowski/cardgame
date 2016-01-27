@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -19,6 +18,7 @@ public class CardBehaviour : MonoBehaviour, IPointerClickHandler
     public void Init(CardDescriptor card, int index)
     {
         this.Inject();
+        GetComponent<HoverOver>().Reset(true);
         Card = card;
         Index = index;
      
