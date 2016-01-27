@@ -10,9 +10,8 @@ public class CardAssetsProvider
 
     public CardAssetsProvider()
     {
-        Debug.Log("CardAssetsProvider");
-        Icons = AssetDatabase.LoadAllAssetRepresentationsAtPath("Assets/icons.png").OfType<Sprite>().ToList();
-        CardAttrPrefab = (Transform)AssetDatabase.LoadAssetAtPath("Assets/Card Description Icon.prefab", typeof(Transform));
+        Icons = AssetDatabase.LoadAllAssetRepresentationsAtPath("Assets/Scenes/CardBattle/icons.png").OfType<Sprite>().ToList();
+        CardAttrPrefab = (Transform)AssetDatabase.LoadAssetAtPath("Assets/Scenes/CardBattle/Card Description Icon.prefab", typeof(Transform));
     }
 
     public Sprite GetSpriteForAttribute(CardAttribute.Type type)
