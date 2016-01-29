@@ -1,9 +1,14 @@
 ﻿public class HealthTracker
 {
-    public static int PlayerHealth = 10;
-    public static int OpponentHealth = 8;
+	public int PlayerHealth { get; set; }
+	public int OpponentHealth { get; set; }
 
-    public static bool SomeoneDied()
+	public HealthTracker(){
+		PlayerHealth = 10;
+		OpponentHealth = 8;
+	}
+
+    public bool SomeoneDied()
     {
         return OpponentHealth <= 0 || PlayerHealth <= 0;
     }

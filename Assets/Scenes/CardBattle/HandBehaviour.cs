@@ -11,7 +11,10 @@ public class HandBehaviour : MonoBehaviour
     private const int PlayZoneCardHeightMarker = 110;
 
     [Inject]
-    public GameTracker GameTracker;
+    public GameTracker gameTracker;
+
+	[Inject]
+	public HealthTracker healthTracker;
 
     public List<GameObject> cards;
     public GameObject opponentCard;
@@ -111,7 +114,7 @@ public class HandBehaviour : MonoBehaviour
         switch (firstPlayer)
         {
             case ActivePlayer.Player:
-                GameTracker.IsPlayerTurn = true;
+                gameTracker.IsPlayerTurn = true;
                 break;
             case ActivePlayer.Opponent:
                 OpponentTurn();
@@ -131,7 +134,7 @@ public class HandBehaviour : MonoBehaviour
 
     private bool IsHandEmpty()
     {
-        return cards.Count == 0;
+		return cards.Count == 0;
     }
 
     private bool ShouldDealMoreCards()
@@ -175,9 +178,9 @@ public class HandBehaviour : MonoBehaviour
 
     public void PlayCard(int index)
     {
-        if (GameTracker.IsPlayerTurn)
+		if (gameTracker.IsPlayerTurn)
         {
-            GameTracker.IsPlayerTurn = false;
+			gameTracker.IsPlayerTurn = false;
             indexOfCardPlayed = index;
             StartCoroutine(MoveCardToPlayZone(cards[indexOfCardPlayed]));
             HandlePlayerAction();
@@ -218,7 +221,7 @@ public class HandBehaviour : MonoBehaviour
         if (firstPlayer == ActivePlayer.Opponent)
         {
             Debug.Log("Player turn");
-            GameTracker.IsPlayerTurn = true;
+			gameTracker.IsPlayerTurn = true;
         }
         else
         {
@@ -238,10 +241,10 @@ public class HandBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(cardResolutionLag);
         var result = cardReducer.ResolveCard(PlayerCard().GetComponent<CardBehaviour>().Card, opponentCard.GetComponent<CardBehaviour>().Card);
-        HealthTracker.PlayerHealth -= result.PlayerDamageTaken;
-        HealthTracker.OpponentHealth -= result.OpponentDamageTaken;
-        Debug.LogFormat("Player received {0} dmg, remaining {1} hp", result.PlayerDamageTaken, HealthTracker.PlayerHealth);
-        Debug.LogFormat("Opponent received {0} dmg, remaining {1} hp", result.OpponentDamageTaken, HealthTracker.OpponentHealth);
+        healthTracker.PlayerHealth -= result.PlayerDamageTaken;
+        healthTracker.OpponentHealth -= result.OpponentDamageTaken;
+        Debug.LogFormat("Player received {0} dmg, remaining {1} hp", result.PlayerDamageTaken, healthTracker.PlayerHealth);
+        Debug.LogFormat("Opponent received {0} dmg, remaining {1} hp", result.OpponentDamageTaken, healthTracker.OpponentHealth);
         if (!WinningConditionCheck())
         {
             DrawPlayerCard();
@@ -249,13 +252,13 @@ public class HandBehaviour : MonoBehaviour
         }
         else
         {
-            winningIndicator.GetComponent<WinningIndicator>().ShowWinner(HealthTracker.PlayerHealth > 0 ? "Player" : "Opponent");
+            winningIndicator.GetComponent<WinningIndicator>().ShowWinner(healthTracker.PlayerHealth > 0 ? "Player" : "Opponent");
         }
     }
 
     private bool WinningConditionCheck()
     {
-        return HealthTracker.SomeoneDied();
+        return healthTracker.SomeoneDied();
     }
 
     public void DrawPlayerCard()

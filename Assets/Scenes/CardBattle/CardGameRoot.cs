@@ -19,6 +19,7 @@ public class CardGameRoot : ContextRoot
         //Register any extensions the container may use.
         container.RegisterExtension<UnityBindingContainerExtension>()
                 .Bind<GameTracker>().ToSingleton()
+				.Bind<HealthTracker>().ToSingleton()
                 .Bind<CardAssetsProvider>().ToSingleton();
 
         //Bind a Transform component to the two cubes on the scene, using a "As" condition
