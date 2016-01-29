@@ -7,6 +7,9 @@ using DG.Tweening;
 
 public class HandBehaviour : MonoBehaviour
 {
+    private const float CardMovingToPlayZoneTime = 0.75f;
+    private const int PlayZoneCardHeightMarker = 110;
+
     [Inject]
     public GameTracker GameTracker;
 
@@ -16,10 +19,12 @@ public class HandBehaviour : MonoBehaviour
     public GameObject cardPrefab;
     public GameObject play;
     public GameObject winningIndicator;
+    public float cardResolutionLag;
     private enum ActivePlayer { Player, Opponent };
     public int indexOfCardPlayed;
     private ActivePlayer firstPlayer;
     private CardReducer cardReducer;
+    
 
 
     // Use this for initialization
@@ -65,12 +70,12 @@ public class HandBehaviour : MonoBehaviour
 
     private static void TranslateCard(Func<int> index, RectTransform cardRectTransform)
     {
-        var l = index();
-        cardRectTransform.Translate(75 + l * 150, 190, 0);
+        var idx = index();
+        cardRectTransform.Translate(75 + idx * 150, 190, 0);
 
         var rotations = new int[] { 4, 2, -2, -4 };
 
-        cardRectTransform.Rotate(Vector3.forward * (rotations[l] * 5));
+        cardRectTransform.Rotate(Vector3.forward * (rotations[idx] * 5));
     }
 
     private void DrawOponentCard()
@@ -81,7 +86,7 @@ public class HandBehaviour : MonoBehaviour
         opponentCard.transform.SetParent(play.transform);
         var cardRectTransform = (RectTransform)opponentCard.transform;
         cardRectTransform.localPosition = Vector3.zero;
-        cardRectTransform.Translate(520, 110, 0);
+        cardRectTransform.Translate(520, PlayZoneCardHeightMarker, 0);
         SetOpponentCardVisibility(false);
     }
 
@@ -172,9 +177,14 @@ public class HandBehaviour : MonoBehaviour
     private IEnumerator MoveCardToPlayZone(GameObject card)
     {
         // we don't want to have the card hover wobbling enabled while the card is floating again
-        card.GetComponent<HoverOver>().Reset(false);
+        var hoverOver = card.GetComponent<HoverOver>();
+        hoverOver.Reset(false);
         card.transform.SetParent(play.transform);
-        yield return card.transform.DOLocalMove(new Vector3(90, 110, 0), 0.75f).WaitForCompletion();
+        var seq = DOTween.Sequence()
+            .Join(card.transform.DOLocalMove(new Vector3(90, PlayZoneCardHeightMarker, 0), CardMovingToPlayZoneTime))
+            .Join(card.transform.DOScale(1f, CardMovingToPlayZoneTime));
+        
+        yield return seq.WaitForCompletion();
     }
 
     private void HandlePlayerAction()
@@ -216,7 +226,7 @@ public class HandBehaviour : MonoBehaviour
 
     private IEnumerator ResolveCard()
     {
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(cardResolutionLag);
         var result = cardReducer.ResolveCard(PlayerCard().GetComponent<CardBehaviour>().Card, opponentCard.GetComponent<CardBehaviour>().Card);
         HealthTracker.PlayerHealth -= result.PlayerDamageTaken;
         HealthTracker.OpponentHealth -= result.OpponentDamageTaken;

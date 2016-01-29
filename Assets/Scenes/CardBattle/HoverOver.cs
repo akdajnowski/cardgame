@@ -7,9 +7,9 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     public float animationTime = 0.35f;
     public Ease ease = Ease.OutBack;
-    private Sequence sequence;
     private RectTransform rect;
-    private Quaternion _baseRotation;
+    public Vector3 baseRotation;
+    private Sequence sequence;
 
     public bool HoverEnabled { get; set; }
 
@@ -17,15 +17,14 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         HoverEnabled = true;
         rect = GetComponent<RectTransform>();
-        _baseRotation = rect.rotation;
+        baseRotation = rect.rotation.eulerAngles;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (HoverEnabled)
         {
-            sequence = DOTween.Sequence();
-            sequence
+            sequence = DOTween.Sequence()
               .Join(transform.DORotate(Vector3.forward, animationTime).SetEase(ease))
               .Join(transform.DOScale(1.3f, animationTime).SetEase(ease));
 
@@ -37,11 +36,9 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (HoverEnabled)
         {
-            sequence = DOTween.Sequence();
-            sequence
-              .Join(transform.DORotateQuaternion(_baseRotation, animationTime).SetEase(ease))
-              .Join(transform.DOScale(1f, animationTime).SetEase(ease))
-              .OnComplete(() => Reset(true));
+            sequence.SmoothRewind();
+
+            //.OnComplete(() => Reset(true));
         }
     }
 
@@ -51,10 +48,8 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         ResetRotationAndScale();
     }
 
-    private void ResetRotationAndScale()
+    public void ResetRotationAndScale()
     {
-        sequence
-           .Join(transform.DORotateQuaternion(_baseRotation, animationTime))
-           .Join(transform.DOScale(1f, animationTime));
+        transform.localScale = new Vector3(1, 1, 1);
     }
 }

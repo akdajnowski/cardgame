@@ -14,18 +14,20 @@ public class CardBehaviour : MonoBehaviour, IPointerClickHandler
     public int Index { get; private set; }
     public HandBehaviour hand;
     private Transform _cardDescription;
+    private HoverOver hoverOver;
 
     public void Init(CardDescriptor card, int index)
     {
         this.Inject();
-        GetComponent<HoverOver>().Reset(true);
+        hoverOver = GetComponent<HoverOver>();
+        hoverOver.Reset(hoverEnabled: true);
         Card = card;
         Index = index;
-     
+
         _cardDescription = transform.FindChild("Card Description");
 
         transform.FindChild("Text").GetComponent<Text>().text = Card.Name;
-        
+
         transform.FindChild("Image").GetComponent<Image>().sprite = cardAssetsProvider.GetSpriteFromPath(Card.CardImage);
 
         RemoveOldIcons();
@@ -38,16 +40,14 @@ public class CardBehaviour : MonoBehaviour, IPointerClickHandler
     {
     }
 
-
-
     private void AddCardAttributeIcons(List<CardAttribute> attributes)
     {
-        attributes.SelectMany(s => Enumerable.Range(1, s.Quantity).Select(i => s.Quality)).ToList().ForEach(i => 
+        attributes.SelectMany(s => Enumerable.Range(1, s.Quantity).Select(i => s.Quality)).ToList().ForEach(i =>
         {
             var attributeIcon = Instantiate(cardAssetsProvider.CardAttrPrefab) as Transform;
             attributeIcon.GetComponent<Image>().sprite = cardAssetsProvider.GetSpriteForAttribute(i);
             attributeIcon.SetParent(_cardDescription, false);
-        });      
+        });
     }
 
     private void RemoveOldIcons()

@@ -302,6 +302,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 100738, guid: c0cca29695a63674db456feb667e132b, type: 2}
   play: {fileID: 495845052}
   winningIndicator: {fileID: 211600196}
+  cardResolutionLag: 10
   indexOfCardPlayed: 0
 --- !u!114 &373353569
 MonoBehaviour:
