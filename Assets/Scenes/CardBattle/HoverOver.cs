@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-[RequireComponent(typeof(RectTransform))]
+[RequireComponent (typeof(RectTransform))]
 public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public float animationTime = 0.35f;
@@ -13,43 +13,41 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public bool HoverEnabled { get; set; }
 
-    void Start()
+    void Start ()
     {
         HoverEnabled = true;
-        rect = GetComponent<RectTransform>();
+        rect = GetComponent<RectTransform> ();
         baseRotation = rect.rotation.eulerAngles;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter (PointerEventData eventData)
     {
-        if (HoverEnabled)
-        {
-            sequence = DOTween.Sequence()
-              .Join(transform.DORotate(Vector3.forward, animationTime).SetEase(ease))
-              .Join(transform.DOScale(1.3f, animationTime).SetEase(ease));
+        if (HoverEnabled) {
+            sequence = DOTween.Sequence ()
+              .Join (transform.DORotate (Vector3.forward, animationTime).SetEase (ease))
+              .Join (transform.DOScale (1.3f, animationTime).SetEase (ease));
 
-            transform.SetAsLastSibling();
+            transform.SetAsLastSibling ();
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit (PointerEventData eventData)
     {
-        if (HoverEnabled)
-        {
-            sequence.SmoothRewind();
+        if (HoverEnabled) {
+            sequence.SmoothRewind ();
 
             //.OnComplete(() => Reset(true));
         }
     }
 
-    public void Reset(bool hoverEnabled)
+    public void Reset (bool hoverEnabled)
     {
         HoverEnabled = hoverEnabled;
-        ResetRotationAndScale();
+        ResetRotationAndScale ();
     }
 
-    public void ResetRotationAndScale()
+    public void ResetRotationAndScale ()
     {
-        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale = new Vector3 (1, 1, 1);
     }
 }
