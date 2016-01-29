@@ -3,7 +3,8 @@
 	public int PlayerHealth { get; set; }
 	public int OpponentHealth { get; set; }
 
-	public HealthTracker(){
+	public HealthTracker()
+	{
 		PlayerHealth = 10;
 		OpponentHealth = 8;
 	}

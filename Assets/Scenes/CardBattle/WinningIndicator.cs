@@ -19,9 +19,10 @@ public class WinningIndicator : MonoBehaviour
 
     }
 
-    public void ShowWinner(string winner)
+	public void ShowWinner(string winner, Color color)
     {
         text.text = winner + " won";
+		text.color = color;
         canvasGroup.alpha = 1;
     }
 }
