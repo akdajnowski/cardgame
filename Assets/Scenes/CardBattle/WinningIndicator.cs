@@ -7,22 +7,22 @@ public class WinningIndicator : MonoBehaviour
     private Text text;
 
     // Use this for initialization
-    void Start()
+    void Start ()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        text = GetComponent<Text>();
+        canvasGroup = GetComponent<CanvasGroup> ();
+        text = GetComponent<Text> ();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update ()
     {
 
     }
 
-	public void ShowWinner(string winner, Color color)
+    public void ShowWinner (string winner, Color color)
     {
         text.text = winner + " won";
-		text.color = color;
+        text.color = color;
         canvasGroup.alpha = 1;
     }
 }

@@ -7,20 +7,20 @@ using UnityEngine;
 
 public class CardGameRoot : ContextRoot
 {
-    public override void Init()
+    public override void Init ()
     {
     }
 
-    public override void SetupContainers()
+    public override void SetupContainers ()
     {
         //Add
-        var container = this.AddContainer<InjectionContainer>();
+        var container = this.AddContainer<InjectionContainer> ();
 
         //Register any extensions the container may use.
-        container.RegisterExtension<UnityBindingContainerExtension>()
-                .Bind<GameTracker>().ToSingleton()
-				.Bind<HealthTracker>().ToSingleton()
-                .Bind<CardAssetsProvider>().ToSingleton();
+        container.RegisterExtension<UnityBindingContainerExtension> ()
+                .Bind<GameTracker> ().ToSingleton ()
+                .Bind<HealthTracker> ().ToSingleton ()
+                .Bind<CardAssetsProvider> ().ToSingleton ();
 
         //Bind a Transform component to the two cubes on the scene, using a "As" condition
         //to define their identifiers.
