@@ -24,8 +24,6 @@ public class HandBehaviour : MonoBehaviour
     public int indexOfCardPlayed;
     private ActivePlayer firstPlayer;
     private CardReducer cardReducer;
-    
-
 
     // Use this for initialization
     void Start()
@@ -41,44 +39,56 @@ public class HandBehaviour : MonoBehaviour
 
     }
 
-    public void DealCard()
+    public void DealCards(GameObject source = null)
     {
-        if (IsHandEmpty())
+        if (!IsHandEmpty())
+            return;
+
+        Debug.Log("Dealing Kurwa leci");
+        while (ShouldDealMoreCards())
         {
-            Debug.Log("Dealing Kurwa leci");
-            while (ShouldDealMoreCards())
-            {
-                var card = (GameObject)Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
-                // get a card
-                var cardBehaviour = card.GetComponent<CardBehaviour>();
+            var p = source ? source.transform.position : Vector3.zero;
+            var r = source ? source.transform.rotation : Quaternion.identity;
 
-                cardBehaviour.hand = this;
-                cards.Add(card);
-                card.transform.SetParent(transform);
-                cardBehaviour.Init(CardRepository.DrawCard(cards.Count - 1), cards.Count - 1);
-                var cardRectTransform = (RectTransform)card.transform;
-                cardRectTransform.localPosition = Vector3.zero;
-
-                TranslateCard(() => (cards.Count - 1), cardRectTransform);
-            }
-
-            DrawOponentCard();
-
-            ChoosePlayer();
+            var card = (GameObject)Instantiate(cardPrefab, p, r);
+            card.transform.SetParent(transform);
+            cards.Add(card);
+            DealCard(card);
         }
+
+        DrawOpponentCard();
+
+        ChoosePlayer();
     }
 
-    private static void TranslateCard(Func<int> index, RectTransform cardRectTransform)
+    private void DealCard(GameObject card)
     {
-        var idx = index();
-        cardRectTransform.Translate(75 + idx * 150, 190, 0);
+        var cardBehaviour = card.GetComponent<CardBehaviour>();
+        cardBehaviour.hand = this;
+        var index = cards.Count - 1;
+
+        cardBehaviour.Init(CardRepository.DrawCard(index), index);
+        var cardRectTransform = (RectTransform)card.transform;
+        cardRectTransform.localPosition = Vector3.zero;
+
+        TranslateCard(index, cardRectTransform);
+    }
+
+    private static void TranslateCard(int index, RectTransform cardRectTransform)
+    {
+        //by trial and error best fit for Deck element, this makes the DealCards(GameObject source = null) a bit pointless since it will work only for that element, whatev
+        cardRectTransform.Translate(-110, 175, 0);
 
         var rotations = new int[] { 4, 2, -2, -4 };
+        var cardRotation = Vector3.forward * (rotations[index] * 5);
 
-        cardRectTransform.Rotate(Vector3.forward * (rotations[idx] * 5));
+        const float cardDealSpeed = 0.5f;
+        cardRectTransform
+            .DOLocalMove(new Vector3(75 + index * 150, 190, 0), cardDealSpeed)
+            .JoinIntoSequence(cardRectTransform.DORotate(cardRotation, cardDealSpeed));
     }
 
-    private void DrawOponentCard()
+    private void DrawOpponentCard()
     {
         opponentCard = (GameObject)Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
         var cardBehaviour = opponentCard.GetComponent<CardBehaviour>();
@@ -141,7 +151,7 @@ public class HandBehaviour : MonoBehaviour
         card.transform.SetParent(transform);
         var cardRectTransform = (RectTransform)card.transform;
         cardRectTransform.localPosition = Vector3.zero;
-        TranslateCard(() => index, cardRectTransform);
+        TranslateCard(index, cardRectTransform);
     }
 
     private void SetOpponentCardVisibility(bool visible)
@@ -183,7 +193,7 @@ public class HandBehaviour : MonoBehaviour
         var seq = DOTween.Sequence()
             .Join(card.transform.DOLocalMove(new Vector3(90, PlayZoneCardHeightMarker, 0), CardMovingToPlayZoneTime))
             .Join(card.transform.DOScale(1f, CardMovingToPlayZoneTime));
-        
+
         yield return seq.WaitForCompletion();
     }
 

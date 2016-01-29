@@ -24,6 +24,6 @@ public class CardDealer : MonoBehaviour
 
     public void DealCard()
     {
-        handBehaviour.DealCard();
+        handBehaviour.DealCards(this.gameObject);
     }
 }
