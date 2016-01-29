@@ -6,9 +6,13 @@ public class MouseHandler : MonoBehaviour
 {
     private static readonly int LeftMouseButton = 0;
 
+    private bool IsLeftMouseButtonIsClicked {
+        get { return Input.GetMouseButtonDown (LeftMouseButton); }
+    }
+
     void Update ()
     {
-        if (IsLeftMouseButtonIsClicked ()) {
+        if (IsLeftMouseButtonIsClicked) {
             MoveShip ();         
         }
 
@@ -22,11 +26,6 @@ public class MouseHandler : MonoBehaviour
         float deltaY = Input.mousePosition.y - objectPos.y;
         float angle = Mathf.Atan2 (deltaY, deltaX) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler (new Vector3 (0, 0, angle));
-    }
-
-    private bool IsLeftMouseButtonIsClicked ()
-    {
-        return Input.GetMouseButtonDown (LeftMouseButton);
     }
 
     private void MoveShip ()
