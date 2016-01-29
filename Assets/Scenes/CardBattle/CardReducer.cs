@@ -8,6 +8,7 @@ public class CardReducer
         public int PlayerDamageTaken;
         public int OpponentDamageTaken;
     }
+
     public Resolution ResolveCard(CardDescriptor playerCard, CardDescriptor opponentCard)
     {
         var player = FlattenAttr(playerCard.CardAttributes);
