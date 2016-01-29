@@ -30,9 +30,8 @@ public class HandBehaviour : MonoBehaviour
     private enum ActivePlayer
     {
         Player,
-        Opponent}
-
-    ;
+        Opponent
+    }
 
     public int indexOfCardPlayed;
     private ActivePlayer firstPlayer;
