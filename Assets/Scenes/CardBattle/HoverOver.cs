@@ -49,5 +49,6 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void ResetRotationAndScale ()
     {
         transform.localScale = new Vector3 (1, 1, 1);
+        transform.DOScale (1.0f, 0);
     }
 }

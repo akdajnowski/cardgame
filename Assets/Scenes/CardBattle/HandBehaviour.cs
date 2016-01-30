@@ -108,11 +108,13 @@ public class HandBehaviour : MonoBehaviour
         //by trial and error best fit for Deck element, this makes the DealCards(GameObject source = null) a bit pointless since it will work only for that element, whatev
         cardRectTransform.Translate (-110, 175, 0);
 
-        var rotations = new int[] { 4, 2, -2, -4 };
+        var rotations = new float[] { 4, 1f, -1f, -4 };
+        var yDeltas = new int[] { -40, 0, 0, -40 };
+        var xDeltas = new int[] { 20, 5, -5, -20 };
         var cardRotation = Vector3.forward * (rotations [index] * 5);
 
         cardRectTransform
-            .DOLocalMove (new Vector3 (75 + index * 150, 190, 0), cardDealSpeed)
+            .DOLocalMove (new Vector3 (75 + xDeltas [index] + index * 150, 190 + yDeltas [index], 0), cardDealSpeed)
             .JoinIntoSequence (cardRectTransform.DORotate (cardRotation, cardDealSpeed));
     }
 
