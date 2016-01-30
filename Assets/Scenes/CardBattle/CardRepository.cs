@@ -11,7 +11,6 @@ public class CardRepository
     public static readonly int HandSize = 4;
     private readonly static Stack<CardDescriptor> _deck = new Stack<CardDescriptor> ();
     public readonly static List<CardDescriptor> Hand = new List<CardDescriptor> ();
-    //public static bool IsPlayerTurn { get; set; }
 
     public static CardDescriptor DrawCard (int index = 0)
     {
