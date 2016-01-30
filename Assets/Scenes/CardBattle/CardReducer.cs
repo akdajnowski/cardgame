@@ -9,30 +9,19 @@ public class CardReducer
         public int OpponentDamageTaken;
     }
 
-    public Resolution ResolveCard(CardDescriptor playerCard, CardDescriptor opponentCard)
+    public Resolution ResolveCard (CardDescriptor playerCard, CardDescriptor opponentCard, SkirmishModifiers skirmishModifiers)
     {
-        var player = FlattenAttr(playerCard.CardAttributes);
-        var opponent = FlattenAttr(opponentCard.CardAttributes);
+        var player = FlattenAttr (playerCard.CardAttributes);
+        var opponent = FlattenAttr (opponentCard.CardAttributes);
 
-        return new Resolution
-        {
-            OpponentDamageTaken = ResolveDamage(player, opponent),
-            PlayerDamageTaken = ResolveDamage(opponent, player),
+        return new Resolution {
+            OpponentDamageTaken = skirmishModifiers.CalculateDamageTaken (ModifierTarget.Oponnnent, player, opponent),
+            PlayerDamageTaken = skirmishModifiers.CalculateDamageTaken (ModifierTarget.Player, opponent, player),
         };
     }
 
-    private static int ResolveDamage(List<CardAttribute.Type> attacker, List<CardAttribute.Type> defender)
+    private List<CardAttribute.Type> FlattenAttr (List<CardAttribute> attributes)
     {
-        var physDealtDamage = (attacker.Count(q => q == CardAttribute.Type.Attack) - defender.Count(q => q == CardAttribute.Type.Defense)).NonNegative();
-        var magDealtDamage = (attacker.Count(q => q == CardAttribute.Type.MagicAttack) - defender.Count(q => q == CardAttribute.Type.MagicDefense)).NonNegative();
-        var heal = defender.Count(q => q == CardAttribute.Type.Heal);
-
-        var damageTakenOverall = (physDealtDamage + magDealtDamage) - heal;
-        return damageTakenOverall;
-    }
-
-    private List<CardAttribute.Type> FlattenAttr(List<CardAttribute> attributes)
-    {
-        return attributes.SelectMany(s => Enumerable.Range(1, s.Quantity).Select(i => s.Quality)).ToList();
+        return attributes.SelectMany (s => Enumerable.Range (1, s.Quantity).Select (i => s.Quality)).ToList ();
     }
 }
