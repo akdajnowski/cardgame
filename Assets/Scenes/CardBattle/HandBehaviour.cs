@@ -175,6 +175,7 @@ public class HandBehaviour : MonoBehaviour
     {
         var cardBehaviour = opponentCard.GetComponent<CardBehaviour> ();
         cardBehaviour.Init (OpponentCardRepository.DrawCard (), cards.Count);
+        opponentCard.transform.SetAsLastSibling ();
         SetOpponentCardVisibility (true);
         HandleOpponentAction ();
     }
