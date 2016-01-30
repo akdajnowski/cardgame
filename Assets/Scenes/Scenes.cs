@@ -9,7 +9,10 @@ using System.Text;
 /// </summary>
 public enum Scenes : int
 {
-    MainMenu = 0,
-    CardBattle = 1
+    Intro,
+    MainMenu,
+    Dialog,
+    Overworld,
+    CardBattle,
 }
 

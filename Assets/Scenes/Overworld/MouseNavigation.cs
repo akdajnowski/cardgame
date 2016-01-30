@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using DG.Tweening;
+using Adic;
+
 
 public class MouseNavigation : MonoBehaviour
 {
     private static readonly float FrontRotationAngle = 270.0f;
+
+    [Inject]
+    public GameStateStore GameStore { get; set; }
 
     void Update ()
     {
@@ -11,6 +16,18 @@ public class MouseNavigation : MonoBehaviour
             transform.RotateAnimate (Input.mousePosition, FrontRotationAngle)
             .AppendIntoSequence (transform.MoveToPlace (Input.mousePosition));             
         }          
+
+
+        transform.RotateInPlace (Input.mousePosition, FrontRotationAngle);
+        if(CollisionDetected(Input.mousePosition))
+        {
+            GameStore.AdvanceState(Scenes.Dialog);
+        }
+    }
+
+    private bool CollisionDetected(Vector3 mousePosition)
+    {
+        return false;
     }
 
     void OnCollisionEnter2D (Collision2D coll)

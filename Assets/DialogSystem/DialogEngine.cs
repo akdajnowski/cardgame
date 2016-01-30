@@ -1,9 +1,6 @@
-﻿using System;
+﻿
 using Adic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Linq;
-using UnityEditor;
+
 
 public class DialogEngine
 {
@@ -54,8 +51,9 @@ public class DialogEngine
     private void GoToBattle(Result gain = null)
     {
         //store.DialogResolution(0, 0, false);
-        store.ReturnScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene((int)Scenes.CardBattle);
+        //store.ReturnScene = (Scenes) SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene((int)Scenes.CardBattle);
+        store.AdvanceState(Scenes.CardBattle);
     }
 
     private Resolution Resolve(Result result, bool success)
