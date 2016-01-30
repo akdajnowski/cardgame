@@ -33,7 +33,9 @@ public class DialogRenderer : MonoBehaviour
         string currentIsland = Store.OverworldState.CurrentIsland.ToLower();
 
 
-        var dialog = dialogs.Dialogs.First(x => x.Id == currentIsland);
+        var dialog = dialogs.Dialogs.FirstOrDefault(x => x.Id == currentIsland);
+        if (dialog == null)
+            throw new DialogMissingException(currentIsland);
         Render(dialog);
     }
 
@@ -45,5 +47,13 @@ public class DialogRenderer : MonoBehaviour
         var textPanelBehaviour = dialogPanel.GetComponent<TextPanelBehaviour>();
         textPanelBehaviour.SelectionCallback(() => Store.AdvanceState(Scenes.CardBattle));
         textPanelBehaviour.SetDialog(dialog);
+    }
+
+    public class DialogMissingException : Exception
+    {
+        public DialogMissingException(string dialogKey) : base("Missing dialog for " + dialogKey)
+        {
+
+        }
     }
 }
