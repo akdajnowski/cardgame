@@ -12,6 +12,8 @@ public class OverworldState
 
     public IDictionary<string, bool> VisitedIslands { get; set; }
 
+    public string CurrentIsland { get; set; }
+
     public OverworldState ()
     {
         VisitedIslands = new Dictionary<string, bool> ();

@@ -28,7 +28,7 @@ public class DialogOption
 
 public class Dialog
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public string Description { get; set; }
     public List<DialogOption> Options { get; set; }
 

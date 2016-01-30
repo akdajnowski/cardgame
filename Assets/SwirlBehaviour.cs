@@ -25,8 +25,9 @@ public class SwirlBehaviour : MonoBehaviour
         var visitedDictionary = Store.OverworldState.VisitedIslands;
         if (!visitedDictionary.ContainsKey (stuff) || !visitedDictionary [stuff]) {
             visitedDictionary [stuff] = true;
-            Debug.Log ("Napierdalamy w swirlu z paramsem: " + stuff);
-            Store.AdvanceState (Scenes.CardBattle);
+            Debug.Log ("We encountered: " +stuff);
+            Store.OverworldState.CurrentIsland = stuff;
+            Store.AdvanceState (Scenes.Dialog);
         }
     }
 }

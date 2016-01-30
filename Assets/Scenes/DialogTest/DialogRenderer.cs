@@ -15,6 +15,9 @@ public class DialogRenderer : MonoBehaviour
     [Inject]
     public DialogEngine dialogEngine;
 
+    [Inject]
+    public GameStateStore Store { get; set; }
+
     public TextAsset dialogAsset;
     public Transform DialogPanel;
     public Transform target;
@@ -28,8 +31,11 @@ public class DialogRenderer : MonoBehaviour
         var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
         var input = new StringReader(dialogAsset.text);
         dialogs = deserializer.Deserialize<DialogsRoot>(input);
-       
-        var dialog = dialogs.Dialogs.First();
+
+        string currentIsland = Store.OverworldState.CurrentIsland.ToLower();
+
+
+        var dialog = dialogs.Dialogs.First(x => x.Id == currentIsland);
         Render(dialog);
     }
 
