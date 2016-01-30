@@ -30,12 +30,15 @@ public class HandBehaviour : MonoBehaviour
     public GameObject cardPrefab;
     public GameObject play;
     public Text playerHealth;
+    public Text cardDescription;
+    public GameObject cardDescriptionContainer;
     public Text opponentHealth;
     public Text playerHealthChange;
     public Text opponentHealthChange;
 
     public GameObject winningIndicator;
     public float cardResolutionLag;
+    private CanvasGroup cardDescriptionContainerCanvasGroup;
 
     private enum ActivePlayer
     {
@@ -51,18 +54,10 @@ public class HandBehaviour : MonoBehaviour
     void Start ()
     {
         this.Inject ();
-        skirmishModifiers = new SkirmishModifiers {
-            Modifiers = new List<StatModifier> {
-                new StatModifier {
-                    Modifier = ModifierType.Damage,
-                    Target = ModifierTarget.Oponnnent,
-                    Value = 2
-                }
-            }
-        };
+        skirmishModifiers = new SkirmishModifiers ();
         ShowPlayerHealth ();
         cards = new List<GameObject> ();
-        Debug.Log ("fffff" + store.ReturnScene);
+        cardDescriptionContainerCanvasGroup = cardDescriptionContainer.GetComponent<CanvasGroup> ();
     }
 
     // Update is called once per frame
@@ -82,6 +77,10 @@ public class HandBehaviour : MonoBehaviour
             var r = source ? source.transform.rotation : Quaternion.identity;
 
             var card = (GameObject)Instantiate (cardPrefab, p, r);
+            var hoverOver = card.GetComponent<HoverOver> ();
+            hoverOver.HoverStarted += HoveredOver;
+            hoverOver.HoverFinished += HoveredOut;
+
             card.transform.SetParent (transform);
             cards.Add (card);
             DealCard (card);
@@ -90,6 +89,19 @@ public class HandBehaviour : MonoBehaviour
         DrawOpponentCard ();
 
         ChoosePlayer ();
+    }
+
+    private void HoveredOver (Transform transform)
+    {
+        var cardBehaviour = transform.GetComponent<CardBehaviour> ();
+        cardDescription.text = "<b>" + cardBehaviour.Card.Name + "</b>\n" + cardBehaviour.Card.Description;
+        cardDescriptionContainerCanvasGroup.DOFade (1.0f, 0.5f);
+
+    }
+
+    private void HoveredOut (Transform transform)
+    {
+        cardDescriptionContainerCanvasGroup.DOFade (0.0f, 0.5f);
     }
 
     private void DealCard (GameObject card)
@@ -129,6 +141,11 @@ public class HandBehaviour : MonoBehaviour
         var cardRectTransform = (RectTransform)opponentCard.transform;
         cardRectTransform.localPosition = Vector3.zero;
         cardRectTransform.Translate (520, PlayZoneCardHeightMarker, 0);
+
+        var hoverOver = opponentCard.GetComponent<HoverOver> ();
+        hoverOver.HoverStarted += HoveredOver;
+        hoverOver.HoverFinished += HoveredOut;
+
         SetOpponentCardVisibility (false);
     }
 
@@ -261,19 +278,12 @@ public class HandBehaviour : MonoBehaviour
         var result = cardReducer.ResolveCard (PlayerCard ().GetComponent<CardBehaviour> ().Card, opponentCard.GetComponent<CardBehaviour> ().Card, skirmishModifiers);
         SetTextToIndicators (playerHealthChange, result.PlayerDamageTaken);
         SetTextToIndicators (opponentHealthChange, result.OpponentDamageTaken);
-        /*var seq = 
-            playerHealthChange.transform.DOLocalMove (new Vector3 (-292.0f, -200f, 0), 1.0f)
-                .JoinIntoSequence
-            (playerHealthChange.transform.DOLocalMove (new Vector3 (-292.0f, -150f, 0), 1.0f));
 
-        yield return seq.WaitForCompletion ();*/
         float zToRevertTo = playerHealthChange.transform.position.y;
         var animation = playerHealthChange.transform.DOMove (new Vector3 (106.5f, playerHealth.transform.position.y - 20.0f, 0), 2.0f).JoinIntoSequence (
                             opponentHealthChange.transform.DOMove (new Vector3 (907.9f, playerHealth.transform.position.y - 20.0f, 0), 2.0f));
 
         yield return animation.WaitForCompletion ();
-        Debug.Log (playerHealthChange.transform.position.y);
-        Debug.Log (playerHealth.transform.position.y);
         playerHealthChange.transform.position = new Vector3 (106.5f, zToRevertTo, 0);
         opponentHealthChange.transform.position = new Vector3 (907.9f, zToRevertTo, 0);
         playerHealthChange.text = "";
@@ -322,15 +332,13 @@ public class HandBehaviour : MonoBehaviour
     {
         var playerWon = healthTracker.PlayerHealth > 0;
         var winningGamer = playerWon ? "Player" : "Opponent";
-        var messageColor = playerWon ? Color.blue : Color.red;
-        winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer, messageColor);
+        winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer);
         BackToMap ();
     }
 
     private void BackToMap ()
     {
-        StartCoroutine (BackToMapRoutine ());
-               
+        StartCoroutine (BackToMapRoutine ());              
     }
 
     IEnumerator BackToMapRoutine ()
@@ -342,14 +350,11 @@ public class HandBehaviour : MonoBehaviour
     void ShowPlayerHealth ()
     {
         playerHealth.text = healthTracker.PlayerHealth.ToString () + " ❤";
-        playerHealth.color = healthTracker.PlayerHealth > 0 ? Color.green : Color.red;
         opponentHealth.text = healthTracker.OpponentHealth.ToString () + " ❤";
-        opponentHealth.color = healthTracker.OpponentHealth > 0 ? Color.green : Color.red;
     }
 
     private void SetTextToIndicators (Text text, int value)
     {
-        text.color = value < 0 ? Color.green : Color.red;
         text.text = (value < 0 ? "+" : "") + (-value) + " ❤";
     }
 }

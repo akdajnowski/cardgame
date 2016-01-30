@@ -5,6 +5,11 @@ using DG.Tweening;
 [RequireComponent (typeof(RectTransform))]
 public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public delegate void HoverDelegate (Transform transform);
+
+    public event HoverDelegate HoverStarted;
+    public event HoverDelegate HoverFinished;
+
     public float animationTime = 0.35f;
     public Ease ease = Ease.OutBack;
     private RectTransform rect;
@@ -23,6 +28,9 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerEnter (PointerEventData eventData)
     {
         if (HoverEnabled) {
+            if (HoverStarted != null) {
+                HoverStarted (transform);
+            }
             sequence = DOTween.Sequence ()
               .Join (transform.DORotate (Vector3.forward, animationTime).SetEase (ease))
               .Join (transform.DOScale (1.3f, animationTime).SetEase (ease));
@@ -35,8 +43,9 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (HoverEnabled) {
             sequence.SmoothRewind ();
-
-            //.OnComplete(() => Reset(true));
+            if (HoverFinished != null) {
+                HoverFinished (transform);
+            }
         }
     }
 
@@ -50,5 +59,8 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         transform.localScale = new Vector3 (1, 1, 1);
         transform.DOScale (1.0f, 0);
+        if (HoverFinished != null) {
+            HoverFinished (transform);
+        }
     }
 }
