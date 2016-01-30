@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ScreenFader
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - ScreenFader
   - 
   - 
   - 
@@ -38,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Sea0
+    uniqueID: 4218712999
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

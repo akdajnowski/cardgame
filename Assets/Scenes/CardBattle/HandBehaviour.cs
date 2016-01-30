@@ -12,9 +12,13 @@ public class HandBehaviour : MonoBehaviour
     private const int PlayZoneCardHeightMarker = 110;
 
     [Inject]
-    public HealthTracker healthTracker;
+    public BattleHealthTracker healthTracker;
     [Inject]
     public GameTracker gameTracker;
+
+    [Inject]
+    public GameStateStore store;
+
     [Inject]
     public CardReducer cardReducer;
 
@@ -45,6 +49,7 @@ public class HandBehaviour : MonoBehaviour
         playerHealth.text = healthTracker.PlayerHealth.ToString();
         opponentHealth.text = healthTracker.OpponentHealth.ToString();
         cards = new List<GameObject>();
+        Debug.Log("fffff" + store.ReturnScene);
     }
 
     // Update is called once per frame

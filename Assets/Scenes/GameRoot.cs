@@ -1,7 +1,7 @@
 ﻿using Adic;
+using UnityEngine;
 
-
-public class CardGameRoot : ContextRoot
+public class GameRoot : ContextRoot
 {
     public override void Init()
     {
@@ -16,7 +16,9 @@ public class CardGameRoot : ContextRoot
         container.RegisterExtension<UnityBindingContainerExtension>()
                 .Bind<GameTracker>().ToSingleton()
                 .Bind<CardReducer>().ToSingleton()
-                .Bind<HealthTracker>().ToSingleton()
+                .Bind<BattleHealthTracker>().ToSingleton()
+                .Bind<GameStateStore>().ToFactory<GlobalStateFactory>()
+                .Bind<DialogEngine>().ToSingleton()
                 .Bind<CardAssetsProvider>().ToSingleton();
 
         //Bind a Transform component to the two cubes on the scene, using a "As" condition

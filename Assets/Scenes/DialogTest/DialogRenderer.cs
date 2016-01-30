@@ -28,9 +28,7 @@ public class DialogRenderer : MonoBehaviour
         var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
         var input = new StringReader(dialogAsset.text);
         dialogs = deserializer.Deserialize<DialogsRoot>(input);
-
-        Func<int> counter = FP.Inc();
-
+       
         var dialog = dialogs.Dialogs.First();
         Render(dialog);
     }
@@ -48,16 +46,5 @@ public class DialogRenderer : MonoBehaviour
     private Action<DialogOption> HandleOption(Dialog dialog)
     {
         return opt => dialogEngine.Handle(dialog, opt);
-    }
-
-    private static Vector3 GetHeightPointer(Func<int> func, TextPanelBehaviour tpb)
-    {
-        return Vector3.up * func() * ((RectTransform)tpb.transform).rect.height;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

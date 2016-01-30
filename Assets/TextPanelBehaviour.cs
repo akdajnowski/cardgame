@@ -24,12 +24,7 @@ public class TextPanelBehaviour : MonoBehaviour
         }
         guid = Guid.NewGuid();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     public void SetDialog(Dialog dialog)
     {

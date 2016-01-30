@@ -1,8 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using Adic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Linq;
+using UnityEditor;
 
 public class DialogEngine
 {
     private System.Random rnd;
+
+    [Inject]
+    public GameStateStore store;
+
+    [Inject]
+    public GameTracker tracker;
 
     public DialogEngine()
     {
@@ -13,13 +24,45 @@ public class DialogEngine
         //we default to true, if Chance is not defined
         var success = opt.Outcome.Chance.HasValue ? Resolve(opt.Outcome.Chance.Value) : true;
 
-        var resulution = Resolve(success ? opt.Outcome.Gain : opt.Outcome.Loss, success);
-        Debug.Log(resulution);
+        var resolution = Resolve(success ? opt.Outcome.Gain : opt.Outcome.Loss, success);
+        if (!success)
+        {
+            HandleFailure(opt.Outcome);
+        }
+        else
+        {
+            HandleSuccess(opt.Outcome);
+        }
+    }
+
+    private void HandleSuccess(DialogOptionOutcome outcome)
+    {
+        switch (outcome.Type)
+        {
+            case "fight": GoToBattle(outcome.Gain); break;
+        }
+    }
+
+    private void HandleFailure(DialogOptionOutcome outcome)
+    {
+        switch (outcome.Type)
+        {
+            case "flee": GoToBattle(); break;
+        }
+    }
+
+    private void GoToBattle(Result gain = null)
+    {
+        //store.DialogResolution(0, 0, false);
+        store.ReturnScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene((int)Scenes.CardBattle);
     }
 
     private Resolution Resolve(Result result, bool success)
     {
-        var hp = result.Hp == null ? 0: Resolve(result.Hp);
+        if (result == null) return EmptyResolution;
+
+        var hp = result.Hp == null ? 0 : Resolve(result.Hp);
         var crew = result.Crew == null ? 0 : Resolve(result.Crew);
         return new Resolution
         {
@@ -45,4 +88,6 @@ public class DialogEngine
         public int crew;
         public bool negative;
     }
+
+    public static Resolution EmptyResolution = new Resolution();
 }
