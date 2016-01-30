@@ -27,17 +27,17 @@ public class CardRepository
 
     private static void FillDeck (int cardNo = 10)
     {
-        int rare = (int)Math.Round(0.0 * cardNo);
-        int uncommon = (int)Math.Round(0.3 * cardNo);
+        int rare = (int)Math.Round (0.0 * cardNo);
+        int uncommon = (int)Math.Round (0.3 * cardNo);
         int common = cardNo - uncommon - rare;
 
-        var cards = GameStateStore.Instance.GetRandomCards(rare, CardDescriptor.CardRarity.Rare);
-        cards.AddRange(GameStateStore.Instance.GetRandomCards(uncommon, CardDescriptor.CardRarity.Uncommon));
-        cards.AddRange(GameStateStore.Instance.GetRandomCards(common, CardDescriptor.CardRarity.Common));
-        
-        foreach (var card in cards)
-        {
-            _deck.Push(card);
+        var cards = GameStateStore.Instance.GetRandomCards (rare, CardDescriptor.CardRarity.Rare);
+        cards.AddRange (GameStateStore.Instance.GetRandomCards (uncommon, CardDescriptor.CardRarity.Uncommon));
+        cards.AddRange (GameStateStore.Instance.GetRandomCards (common, CardDescriptor.CardRarity.Common));
+        System.Random r = new System.Random ();
+        cards = cards.OrderBy (i => r.Next ()).ToList ();
+        foreach (var card in cards) {
+            _deck.Push (card);
         }
     }
 }
