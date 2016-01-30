@@ -11,6 +11,13 @@ public class CardRepository
 
     public static CardDescriptor DrawCard(int index = 0)
     {
+        //move somewhere else
+        CardLoader loader = new CardLoader();
+        Cards.AddRange(loader.LoadCards(@"D:\Dev\GitHub\cardgame\Assets\Resources\cardLibrary.yml"));
+        Cards.AddRange(loader.LoadCards(@"D:\Dev\GitHub\cardgame\Assets\Resources\cardLibrary.yml"));
+        Cards.AddRange(loader.LoadCards(@"D:\Dev\GitHub\cardgame\Assets\Resources\cardLibrary.yml"));
+
+
         // to refactor
         if(_deck.Count == 0)
         {
@@ -33,56 +40,56 @@ public class CardRepository
     }
 
     public readonly static List<CardDescriptor> Cards = new List<CardDescriptor> {
-        new CardDescriptor
-        {
-            Name = "Odin the Virgin Destroyer",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>
-            {
-                new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 2 },
-                new CardAttribute { Quality = CardAttribute.Type.Defense, Quantity = 1 },
-                new CardAttribute { Quality = CardAttribute.Type.MagicAttack, Quantity = 1 },
-                new CardAttribute { Quality = CardAttribute.Type.MagicDefense, Quantity = 2 },
-                new CardAttribute { Quality = CardAttribute.Type.Heal, Quantity = 1 }
-            }
-        },
-        new CardDescriptor
-        {
-            Name = "Cannon ball salve",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>
-            {
-                new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 2 }
-            }
-        },
-        new CardDescriptor
-        {
-            Name = "Boarding party",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>
-            {
-                new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 1 },
-                new CardAttribute { Quality = CardAttribute.Type.Defense, Quantity = 1 }
-            }
-        },
-        new CardDescriptor
-        {
-            Name = "Defensive repairs",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>
-            {
-                new CardAttribute { Quality = CardAttribute.Type.Defense, Quantity = 1 },
-                new CardAttribute { Quality = CardAttribute.Type.Heal, Quantity = 1 }
-            }
-        },
-        new CardDescriptor
-        {
-            Name = "Arrow salve",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>
-            {
-                new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 1 }
-            }
-        },
+        //new CardDescriptor
+        //{
+        //    Name = "Odin the Virgin Destroyer",
+        //    CardImage = "icons_9",
+        //    CardAttributes = new List<CardAttribute>
+        //    {
+        //        new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 2 },
+        //        new CardAttribute { Quality = CardAttribute.Type.Defense, Quantity = 1 },
+        //        new CardAttribute { Quality = CardAttribute.Type.MagicAttack, Quantity = 1 },
+        //        new CardAttribute { Quality = CardAttribute.Type.MagicDefense, Quantity = 2 },
+        //        new CardAttribute { Quality = CardAttribute.Type.Heal, Quantity = 1 }
+        //    }
+        //},
+        //new CardDescriptor
+        //{
+        //    Name = "Cannon ball salve",
+        //    CardImage = "icons_9",
+        //    CardAttributes = new List<CardAttribute>
+        //    {
+        //        new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 2 }
+        //    }
+        //},
+        //new CardDescriptor
+        //{
+        //    Name = "Boarding party",
+        //    CardImage = "icons_9",
+        //    CardAttributes = new List<CardAttribute>
+        //    {
+        //        new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 1 },
+        //        new CardAttribute { Quality = CardAttribute.Type.Defense, Quantity = 1 }
+        //    }
+        //},
+        //new CardDescriptor
+        //{
+        //    Name = "Defensive repairs",
+        //    CardImage = "icons_9",
+        //    CardAttributes = new List<CardAttribute>
+        //    {
+        //        new CardAttribute { Quality = CardAttribute.Type.Defense, Quantity = 1 },
+        //        new CardAttribute { Quality = CardAttribute.Type.Heal, Quantity = 1 }
+        //    }
+        //},
+        //new CardDescriptor
+        //{
+        //    Name = "Arrow salve",
+        //    CardImage = "icons_9",
+        //    CardAttributes = new List<CardAttribute>
+        //    {
+        //        new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 1 }
+        //    }
+        //},
     };
 }

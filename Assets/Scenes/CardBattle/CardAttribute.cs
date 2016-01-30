@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using YamlDotNet.Serialization;
 
 public class CardAttribute
 {
@@ -10,9 +11,19 @@ public class CardAttribute
         Defense
     }
 
-    public Type Quality;
+    [YamlMember(Alias = "quality")]
+    public Type Quality
+    {
+        get;
+        set;
+    }
 
-    public int Quantity;
+    [YamlMember(Alias = "quantity")]
+    public int Quantity
+    {
+        get;
+        set;
+    }
 
     public static readonly IDictionary<Type, string> IconMap = new Dictionary<Type, string> {
         { Type.Attack, "icons_1" },
