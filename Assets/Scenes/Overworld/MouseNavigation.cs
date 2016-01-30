@@ -12,4 +12,12 @@ public class MouseNavigation : MonoBehaviour
             .AppendIntoSequence (transform.MoveToPlace (Input.mousePosition));             
         }          
     }
+
+    void OnCollisionEnter2D (Collision2D coll)
+    {
+        Debug.Log ("Kolizja kurwo z : " + coll.gameObject.name);
+        if (coll.gameObject.tag == "swirl")
+            coll.gameObject.SendMessage ("CollisionPerform", 10);
+
+    }
 }
