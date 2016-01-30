@@ -12,6 +12,7 @@ public class GameStateStore
     public Ship Ship { get; set; }
 
     private static GameStateStore _instance;
+    public System.Collections.Generic.List<CardDescriptor> CardInformation;
 
     public static GameStateStore Instance {
         get {

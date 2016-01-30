@@ -32,31 +32,5 @@ public class OpponentCardRepository
         };
     }
 
-    public readonly static List<CardDescriptor> Cards = new List<CardDescriptor> {
-        new CardDescriptor
-        {
-            Name = "Cannon ball salve",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>
-            {
-                new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 2 }
-            }
-        },
-        new CardDescriptor
-        {
-            Name = "Welsh faggot",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>()
-        },
-        new CardDescriptor
-        {
-            Name = "Boarding party",
-            CardImage = "icons_9",
-            CardAttributes = new List<CardAttribute>
-            {
-                new CardAttribute { Quality = CardAttribute.Type.Attack, Quantity = 1 },
-                new CardAttribute { Quality = CardAttribute.Type.Defense, Quantity = 1 }
-            }
-        }
-    };
+    public readonly static List<CardDescriptor> Cards = GameStateStore.Instance.CardInformation;
 }
