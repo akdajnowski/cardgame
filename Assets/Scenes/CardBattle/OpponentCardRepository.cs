@@ -24,13 +24,17 @@ public class OpponentCardRepository
 
     private static void FillDeck(int cardNo = 10)
     {
-        var rnd = new Random();
-        for (int i = 0; i < cardNo; i++)
-        {
-            var idx = rnd.Next(0, Cards.Count - 1);
-            _deck.Push(Cards[idx]);
-        };
-    }
+        int rare = (int)Math.Round(0.1 * cardNo);
+        int uncommon = (int)Math.Round(0.4 * cardNo);
+        int common = cardNo - uncommon - rare;
 
-    public readonly static List<CardDescriptor> Cards = GameStateStore.Instance.CardInformation;
+        var cards = GameStateStore.Instance.GetRandomCards(rare, CardDescriptor.CardRarity.Rare);
+        cards.AddRange(GameStateStore.Instance.GetRandomCards(uncommon, CardDescriptor.CardRarity.Uncommon));
+        cards.AddRange(GameStateStore.Instance.GetRandomCards(common, CardDescriptor.CardRarity.Common));
+
+        foreach (var card in cards)
+        {
+            _deck.Push(card);
+        }
+    }
 }

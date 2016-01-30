@@ -40,8 +40,6 @@ public class GameStateStore
         if (OnStateCHange != null) {
             OnStateCHange ();
         }
-
-
     }
 
     private GameStateStore ()
@@ -52,5 +50,18 @@ public class GameStateStore
     public void DialogResolution (int hp, int crew, bool negative)
     {
         //throw new NotImplementedException();
+    }
+
+    public List<CardDescriptor> GetRandomCards(int number, CardDescriptor.CardRarity rarity)
+    {
+        var cards = new List<CardDescriptor>();
+        var rnd = new System.Random();
+        for (int i = 0; i < number; i++)
+        {
+            var cardsPool = CardInformation.Where(c => c.Rarity == rarity).ToList();
+            var idx = rnd.Next(0, cardsPool.Count() - 1);
+            cards.Add(cardsPool[idx]);
+        }
+        return cards;
     }
 }

@@ -28,7 +28,7 @@ public class CardLoader : MonoBehaviour
         var cardsString = new StringReader(cardAsset.text);
         List<CardDescriptor> cards = deserializer.Deserialize<List<CardDescriptor>>(cardsString);
 
-        PrintDebug(cards);
+        //PrintDebug(cards);
 
         return cards;
     }
