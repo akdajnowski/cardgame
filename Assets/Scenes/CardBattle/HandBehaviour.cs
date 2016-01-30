@@ -56,6 +56,7 @@ public class HandBehaviour : MonoBehaviour
     void Start ()
     {
         this.Inject ();
+        OpponentCardRepository.NewDeck ();
         skirmishModifiers = new SkirmishModifiers ();
         ShowPlayerHealth ();
         cards = new List<GameObject> ();

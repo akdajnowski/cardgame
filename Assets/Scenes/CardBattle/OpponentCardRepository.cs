@@ -22,6 +22,23 @@ public class OpponentCardRepository
         return card;
     }
 
+    public static void NewDeck ()
+    {
+        _deck.Clear (); 
+    }
+
+    public static IEnumerable<CardDescriptor> GetRareCards (int count = 1)
+    {
+        int rareCountInDeck = _deck.Count (i => i.Rarity == CardDescriptor.CardRarity.Rare);
+        if (rareCountInDeck >= count) {
+            System.Random r = new System.Random ();
+            return _deck.Where (i => i.Rarity == CardDescriptor.CardRarity.Rare).OrderBy (i => r.Next ()).Take (count).ToList ();
+        } else {
+            return  _deck.Where (i => i.Rarity == CardDescriptor.CardRarity.Rare).Concat (
+                GameStateStore.Instance.GetRandomCards (count - rareCountInDeck, CardDescriptor.CardRarity.Rare)).ToList (); 
+        }
+    }
+
     private static void FillDeck (int cardNo = 10)
     {
         int rare = (int)Math.Round (0.1 * cardNo);
