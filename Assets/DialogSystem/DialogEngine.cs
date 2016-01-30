@@ -1,5 +1,7 @@
 ﻿
 using Adic;
+using System;
+
 
 
 public class DialogEngine
@@ -16,7 +18,23 @@ public class DialogEngine
     {
         rnd = new System.Random();
     }
+
     public void Handle(Dialog dialog, DialogOption opt)
+    {
+        switch(opt.Outcome.Type)
+        {
+            case "fight":
+                
+                break;
+            case "flee":
+                break;
+            case "quest":
+                break;
+            default:
+                throw new InvalidOutcomeTypeException();
+        }
+    }
+    /*public void Handle(Dialog dialog, DialogOption opt)
     {
         //we default to true, if Chance is not defined
         var success = opt.Outcome.Chance.HasValue ? Resolve(opt.Outcome.Chance.Value) : true;
@@ -87,5 +105,5 @@ public class DialogEngine
         public bool negative;
     }
 
-    public static Resolution EmptyResolution = new Resolution();
+    public static Resolution EmptyResolution = new Resolution();*/
 }
