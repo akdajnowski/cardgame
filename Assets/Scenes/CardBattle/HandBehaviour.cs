@@ -31,6 +31,9 @@ public class HandBehaviour : MonoBehaviour
     public GameObject play;
     public Text playerHealth;
     public Text opponentHealth;
+    public Text playerHealthChange;
+    public Text opponentHealthChange;
+
     public GameObject winningIndicator;
     public float cardResolutionLag;
 
@@ -57,8 +60,7 @@ public class HandBehaviour : MonoBehaviour
                 }
             }
         };
-        playerHealth.text = healthTracker.PlayerHealth.ToString ();
-        opponentHealth.text = healthTracker.OpponentHealth.ToString ();
+        ShowPlayerHealth ();
         cards = new List<GameObject> ();
         Debug.Log ("fffff" + store.ReturnScene);
     }
@@ -256,13 +258,37 @@ public class HandBehaviour : MonoBehaviour
 
     private IEnumerator ResolveCard ()
     {
-        yield return new WaitForSeconds (cardResolutionLag);
         var result = cardReducer.ResolveCard (PlayerCard ().GetComponent<CardBehaviour> ().Card, opponentCard.GetComponent<CardBehaviour> ().Card, skirmishModifiers);
+        SetTextToIndicators (playerHealthChange, result.PlayerDamageTaken);
+        SetTextToIndicators (opponentHealthChange, result.OpponentDamageTaken);
+        /*var seq = 
+            playerHealthChange.transform.DOLocalMove (new Vector3 (-292.0f, -200f, 0), 1.0f)
+                .JoinIntoSequence
+            (playerHealthChange.transform.DOLocalMove (new Vector3 (-292.0f, -150f, 0), 1.0f));
+
+        yield return seq.WaitForCompletion ();*/
+        float zToRevertTo = playerHealthChange.transform.position.y;
+        var animation = playerHealthChange.transform.DOMove (new Vector3 (106.5f, playerHealth.transform.position.y - 20.0f, 0), 2.0f).JoinIntoSequence (
+                            opponentHealthChange.transform.DOMove (new Vector3 (907.9f, playerHealth.transform.position.y - 20.0f, 0), 2.0f));
+
+        yield return animation.WaitForCompletion ();
+        Debug.Log (playerHealthChange.transform.position.y);
+        Debug.Log (playerHealth.transform.position.y);
+        playerHealthChange.transform.position = new Vector3 (106.5f, zToRevertTo, 0);
+        opponentHealthChange.transform.position = new Vector3 (907.9f, zToRevertTo, 0);
+        playerHealthChange.text = "";
+        opponentHealthChange.text = "";
+
         healthTracker.PlayerHealth -= result.PlayerDamageTaken;
         healthTracker.OpponentHealth -= result.OpponentDamageTaken;
 
-        playerHealth.text = healthTracker.PlayerHealth.ToString ();
-        opponentHealth.text = healthTracker.OpponentHealth.ToString ();
+        ShowPlayerHealth ();
+        var healthSequence = playerHealth.transform.DOScale (1.3f, 0.75f).JoinIntoSequence (
+                                 opponentHealth.transform.DOScale (1.3f, 0.75f));
+        yield return healthSequence.WaitForCompletion ();
+
+        yield return playerHealth.transform.DOScale (1.0f, 0.75f).JoinIntoSequence (
+            opponentHealth.transform.DOScale (1.0f, 0.75f)).WaitForCompletion ();
 
         Debug.LogFormat ("Player received {0} dmg, remaining {1} hp", result.PlayerDamageTaken, healthTracker.PlayerHealth);
         Debug.LogFormat ("Opponent received {0} dmg, remaining {1} hp", result.OpponentDamageTaken, healthTracker.OpponentHealth);
@@ -311,5 +337,19 @@ public class HandBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds (2.0f);
         store.AdvanceState (Scenes.Overworld);
+    }
+
+    void ShowPlayerHealth ()
+    {
+        playerHealth.text = healthTracker.PlayerHealth.ToString () + " ❤";
+        playerHealth.color = healthTracker.PlayerHealth > 0 ? Color.green : Color.red;
+        opponentHealth.text = healthTracker.OpponentHealth.ToString () + " ❤";
+        opponentHealth.color = healthTracker.OpponentHealth > 0 ? Color.green : Color.red;
+    }
+
+    private void SetTextToIndicators (Text text, int value)
+    {
+        text.color = value < 0 ? Color.green : Color.red;
+        text.text = (value < 0 ? "+" : "") + (-value) + " ❤";
     }
 }
