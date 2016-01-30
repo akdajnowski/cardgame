@@ -4,10 +4,12 @@ using UnityEngine;
 public class SeaDrawer : MonoBehaviour
 {
     public GameObject wave;
-    public GameObject ship;
+    public GameObject emitter;
+    public GameObject target;
+    public bool emitterIsTarget;
 
     [Range(0, 10)]
-    public int SpawnEvery = 2;
+    public float SpawnEvery = 2;
 
     [Range(0, 100)]
     public int Distance = 10;
@@ -22,9 +24,9 @@ public class SeaDrawer : MonoBehaviour
 
     IEnumerator Trigger()
     {
-        var rp = new Vector2(ship.transform.position.x, ship.transform.position.y) + Random.insideUnitCircle * Distance;
+        var rp = new Vector2(emitter.transform.position.x, emitter.transform.position.y) + Random.insideUnitCircle * Distance;
         var obj = Instantiate(wave);
-        obj.GetComponent<WaveBehaviour>().detractor = ship.transform;
+        obj.GetComponent<WaveBehaviour>().detractor = (emitterIsTarget || target == null) ? emitter.transform : target.transform;
         obj.GetComponent<WaveBehaviour>().repelForce = RepelForce;
         obj.transform.SetParent(transform);
         obj.transform.position = rp;
