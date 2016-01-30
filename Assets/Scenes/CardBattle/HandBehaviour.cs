@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HandBehaviour : MonoBehaviour
 {
@@ -300,7 +301,13 @@ public class HandBehaviour : MonoBehaviour
 
     private void BackToMap ()
     {
-        StartCoroutine (new [] { new WaitForSeconds (2.0f) }.GetEnumerator ());
+        StartCoroutine (BackToMapRoutine ());
+               
+    }
+
+    IEnumerator BackToMapRoutine ()
+    {
+        yield return new WaitForSeconds (2.0f);
         store.AdvanceState (Scenes.Overworld);
     }
 }

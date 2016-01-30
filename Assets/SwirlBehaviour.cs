@@ -4,8 +4,6 @@ using Adic;
 
 public class SwirlBehaviour : MonoBehaviour
 {
-    private bool visited;
-
     [Inject]
     public GameStateStore Store { get; set; }
 
@@ -24,9 +22,9 @@ public class SwirlBehaviour : MonoBehaviour
 
     void CollisionPerform (string stuff)
     {
-        Debug.Log ("Already visited: " + visited);
-        if (!visited) {
-            visited = true;
+        var visitedDictionary = Store.OverworldState.VisitedIslands;
+        if (!visitedDictionary.ContainsKey (stuff) || !visitedDictionary [stuff]) {
+            visitedDictionary [stuff] = true;
             Debug.Log ("Napierdalamy w swirlu z paramsem: " + stuff);
             Store.AdvanceState (Scenes.CardBattle);
         }

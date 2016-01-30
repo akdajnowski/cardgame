@@ -7,12 +7,16 @@ using System.Collections.Generic;
 public delegate void OnStateChangeHandler ();
 public class GameStateStore
 {
+    public OverworldState OverworldState { get; set; }
+
     private static GameStateStore _instance;
 
     public static GameStateStore Instance {
         get {
             if (_instance == null)
-                _instance = new GameStateStore ();
+                _instance = new GameStateStore {
+                    OverworldState = new OverworldState () 
+                };
             return _instance;
         }
     }
@@ -24,6 +28,7 @@ public class GameStateStore
     public void AdvanceState (Scenes state)
     {
         this.ReturnScene = state;
+        Debug.Log ("Going to " + state);
 
         SceneManager.LoadScene ((int)state);
 

@@ -13,6 +13,11 @@ public class MouseNavigation : MonoBehaviour
     void Start ()
     {
         this.Inject ();
+        if (GameStore.OverworldState != null) {
+            transform.position = GameStore.OverworldState.ShipPosition;
+            transform.rotation = GameStore.OverworldState.ShipRotation; 
+        }
+
     }
 
     void Update ()
@@ -27,6 +32,8 @@ public class MouseNavigation : MonoBehaviour
     {
         if (coll.gameObject.tag == "swirl") {
             Debug.Log ("Kolizja kurwo z : " + coll.gameObject.name);
+            GameStore.OverworldState.ShipPosition = transform.position;
+            GameStore.OverworldState.ShipRotation = transform.rotation;
             coll.gameObject.SendMessage ("CollisionPerform", coll.gameObject.name);
         }
     }
