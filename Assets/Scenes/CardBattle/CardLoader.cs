@@ -9,14 +9,16 @@ using YamlDotNet.Serialization;
 
 public class CardLoader
 {
-    public List<CardDescriptor> LoadCards(string yamlFilePath)
+    public List<CardDescriptor> LoadCards (string yamlFilePath)
     {
         
 
-        var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
+        /*var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
         var file = File.OpenText(yamlFilePath);
         List<CardDescriptor> cards = deserializer.Deserialize<List<CardDescriptor>>(file);
         file.Close();
-        return cards;
+        return cards;*/
+
+        return new List<CardDescriptor> ();
     }
 }

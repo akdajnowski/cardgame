@@ -29,6 +29,5 @@ public class MouseNavigation : MonoBehaviour
             Debug.Log ("Kolizja kurwo z : " + coll.gameObject.name);
             coll.gameObject.SendMessage ("CollisionPerform", coll.gameObject.name);
         }
-
     }
 }

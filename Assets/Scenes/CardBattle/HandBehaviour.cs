@@ -295,6 +295,12 @@ public class HandBehaviour : MonoBehaviour
         var winningGamer = playerWon ? "Player" : "Opponent";
         var messageColor = playerWon ? Color.blue : Color.red;
         winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer, messageColor);
+        BackToMap ();
     }
 
+    private void BackToMap ()
+    {
+        StartCoroutine (new [] { new WaitForSeconds (2.0f) }.GetEnumerator ());
+        store.AdvanceState (Scenes.Overworld);
+    }
 }

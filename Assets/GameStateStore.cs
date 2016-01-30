@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
-public delegate void OnStateChangeHandler();
+public delegate void OnStateChangeHandler ();
 public class GameStateStore
 {
     private static GameStateStore _instance;
 
-    public static GameStateStore Instance
-    {
-        get
-        {
+    public static GameStateStore Instance {
+        get {
             if (_instance == null)
-                _instance = new GameStateStore();
+                _instance = new GameStateStore ();
             return _instance;
         }
     }
@@ -21,24 +21,25 @@ public class GameStateStore
 
     public Scenes ReturnScene { get; internal set; }
 
-    public void AdvanceState(Scenes state)
+    public void AdvanceState (Scenes state)
     {
         this.ReturnScene = state;
-        SceneManager.LoadScene((int)state);
 
-        if (OnStateCHange!=null)
-        {
-            OnStateCHange();
+        SceneManager.LoadScene ((int)state);
+
+        if (OnStateCHange != null) {
+            OnStateCHange ();
         }
 
 
     }
 
-    private GameStateStore()
+    private GameStateStore ()
     {
         ReturnScene = Scenes.Intro;
     }
-    public void DialogResolution(int hp, int crew, bool negative)
+
+    public void DialogResolution (int hp, int crew, bool negative)
     {
         //throw new NotImplementedException();
     }

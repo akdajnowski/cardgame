@@ -375,7 +375,6 @@ GameObject:
   - 222: {fileID: 1369397281}
   - 114: {fileID: 1369397280}
   - 114: {fileID: 1369397279}
-  - 114: {fileID: 1369397282}
   m_Layer: 0
   m_Name: CardBattleButton
   m_TagString: Untagged
@@ -486,17 +485,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1369397277}
---- !u!114 &1369397282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1369397277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b7a3cc6c3acf6d4a9eab04ea5399621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1631122417
 GameObject:
   m_ObjectHideFlags: 0
