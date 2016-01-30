@@ -7,19 +7,20 @@ using System.Collections.Generic;
 public delegate void OnStateChangeHandler ();
 public class GameStateStore
 {
+    private static GameStateStore _instance;
+
     public OverworldState OverworldState { get; set; }
 
-    public Ship Ship { get; set; }
-
-    private static GameStateStore _instance;
-    public System.Collections.Generic.List<CardDescriptor> CardInformation;
+    public CardDeck CardDeck { get; set; }
+    
+    public List<CardDescriptor> CardInformation;
 
     public static GameStateStore Instance {
         get {
             if (_instance == null)
                 _instance = new GameStateStore {
                     OverworldState = new OverworldState(),
-                    Ship = new Ship(50, 25)
+                    CardDeck = new CardDeck()
                 };
             return _instance;
         }
