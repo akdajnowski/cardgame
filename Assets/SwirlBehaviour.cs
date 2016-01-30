@@ -16,7 +16,7 @@ public class SwirlBehaviour : MonoBehaviour
 	
     }
 
-    void CollisionPerform (int stuff)
+    void CollisionPerform (string stuff)
     {
         Debug.Log ("Already visited: " + visited);
         if (!visited) {

@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 337267870}
   - 212: {fileID: 337267869}
-  - 50: {fileID: 337267868}
   - 114: {fileID: 337267871}
   - 61: {fileID: 337267872}
+  - 50: {fileID: 337267868}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -112,15 +112,15 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 337267867}
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0.8
-  m_AngularDrag: 0.8
+  m_Mass: 10000
+  m_LinearDrag: 0
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 2
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!212 &337267869
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 3.96, y: 9.13}
+  m_Size: {x: 3.37, y: 9.13}
 --- !u!1 &424122668
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +370,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1758049824}
   - 61: {fileID: 1758049825}
+  - 114: {fileID: 1758049826}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -404,6 +405,19 @@ BoxCollider2D:
   m_Offset: {x: 0.062111378, y: -0.0621109}
   serializedVersion: 2
   m_Size: {x: 2.3664765, y: 7.708149}
+--- !u!114 &1758049826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1758049823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4243f23de781b074e84bd40078d532db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectionType: 0
+  baseBehaviourTypeName: 
 --- !u!1 &1776945667
 GameObject:
   m_ObjectHideFlags: 0
