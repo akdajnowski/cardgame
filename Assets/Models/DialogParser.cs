@@ -19,13 +19,7 @@ public class DialogParser : MonoBehaviour {
         var output = new StringBuilder();
 
         output.Append(dialogs.Dialogs[0].Description);
-        foreach(var opt in dialogs.Dialogs[0].Options)
-        {
-            output.Append("label: " + opt.Label);
-            output.Append("chance: "+opt.Outcome.Chance);
-
-        }
-        dialogs.Dialogs[0].Options.ForEach(x => { output.Append(x.Label); });
+     
         
 
         Debug.Log(output.ToString());

@@ -28,17 +28,24 @@ public class CardLoader : MonoBehaviour
         var cardsString = new StringReader(cardAsset.text);
         List<CardDescriptor> cards = deserializer.Deserialize<List<CardDescriptor>>(cardsString);
 
-        //foreach (var card in cards)
-        //{
-        //    Debug.Log("name = " + card.Name);
-        //    Debug.Log("image = " + card.CardImage);
-        //    foreach (var attr in card.CardAttributes)
-        //    {
-        //        Debug.Log("attr = " + attr.Quality.ToString() + " " + attr.Quantity.ToString());
-        //    }
-        //    Debug.Log("------------------------------------");
-        //}
+        PrintDebug(cards);
 
         return cards;
+    }
+
+    private void PrintDebug(List<CardDescriptor> cards)
+    {
+        foreach (var card in cards)
+        {
+            Debug.Log("name = " + card.Name);
+            Debug.Log("description = " + card.Description);
+            Debug.Log("image = " + card.CardImage);
+            Debug.Log("rarity = " + card.Rarity);
+            foreach (var attr in card.CardAttributes)
+            {
+                Debug.Log("attr = " + attr.Quality.ToString() + " " + attr.Quantity.ToString());
+            }
+            Debug.Log("------------------------------------");
+        }
     }
 }
