@@ -96,7 +96,8 @@ public class HandBehaviour : MonoBehaviour
     private void HoveredOver (Transform transform)
     {
         var cardBehaviour = transform.GetComponent<CardBehaviour> ();
-        cardDescription.text = "<b>" + cardBehaviour.Card.Name + "</b>\n" + cardBehaviour.Card.Description;
+        var rarity = cardBehaviour.Card.Rarity.ToString ().Substring (0, 1);
+        cardDescription.text = "<b>" + cardBehaviour.Card.Name + "<i>(" + rarity + ")</i></b>\n" + cardBehaviour.Card.Description;
         cardDescriptionContainerCanvasGroup.DOFade (1.0f, 0.5f);
 
     }
