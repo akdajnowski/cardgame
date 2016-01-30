@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public class MouseNavigation : MonoBehaviour
 {
@@ -7,9 +8,8 @@ public class MouseNavigation : MonoBehaviour
     void Update ()
     {
         if (Mouse.IsLeftMouseButtonIsClicked) {
-            transform.MoveToPlace (Input.mousePosition);        
-        }
-
-        transform.RotateInPlace (Input.mousePosition, FrontRotationAngle);
+            transform.RotateAnimate (Input.mousePosition, FrontRotationAngle)
+            .AppendIntoSequence (transform.MoveToPlace (Input.mousePosition));             
+        }          
     }
 }
