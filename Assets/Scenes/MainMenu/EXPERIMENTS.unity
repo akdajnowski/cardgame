@@ -241,7 +241,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 857896622}
   - 212: {fileID: 857896620}
-  - 114: {fileID: 857896621}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -279,17 +278,6 @@ SpriteRenderer:
   m_Color: {r: 0.89705884, g: 0.3495891, b: 0.3495891, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &857896621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 857896619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f892eafbdec577348842f1a317f3df52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &857896622
 Transform:
   m_ObjectHideFlags: 0

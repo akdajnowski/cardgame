@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameStateStore
 {
     private static GameStateStore _instance;
+    public System.Collections.Generic.List<CardDescriptor> CardInformation;
 
     public static GameStateStore Instance
     {

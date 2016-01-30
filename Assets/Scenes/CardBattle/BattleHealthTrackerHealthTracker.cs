@@ -7,7 +7,7 @@
     public BattleHealthTracker()
     {
         PlayerHealth = 10;
-        OpponentHealth = 8;
+        OpponentHealth = 10;
     }
 
     public bool SomeoneDied()

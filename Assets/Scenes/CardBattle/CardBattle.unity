@@ -867,6 +867,7 @@ GameObject:
   - 4: {fileID: 1561803871}
   - 114: {fileID: 1561803870}
   - 114: {fileID: 1561803869}
+  - 114: {fileID: 1561803872}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -910,6 +911,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1561803872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1561803868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b2149c1c52ee140b4093a1925a58e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardAsset: {fileID: 4900000, guid: 938508c019786644f835eef3f94786c5, type: 3}
 --- !u!1 &1730132776
 GameObject:
   m_ObjectHideFlags: 0
