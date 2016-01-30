@@ -1,0 +1,47 @@
+﻿---
+dialogs:
+  - description: |
+      The great volcano eruption tears the island apart as soon as you approach it. You stare at rivers of lava and through the shroud of thick smoke. You could swear that lava starts to pile up and take a human-shaped form. 
+      "It's a lava giant!" the second mate cries. 
+      The lava pile is over 15 foot tall now. Inside the head-shaped bubble on the top the mouth like hole opens and deafening roar tears the air. The monster starts approaching your ship. There's little time to make decisions"
+    options:
+      - label: "Try to run"
+        outcome: 
+          type: "flee"
+          chance: 0.5
+          loss:
+            hp: [0, 7]
+            crew: [2, 5]		
+      - label: "Pick up a fight"
+        outcome: 
+          type: "fight"
+          gain:
+            crew: [4, 7]
+      - label: "Try to reason with him"
+        outcome:
+          type: "quest"
+          chance: 0.1
+          gain: 
+            hp: [0, 0]
+            crew: [1, 3]
+            comment: "The giant unexpectadly turns around and walks away. You have no idea why. When you prepare to leave, it appears there are some men on the island who wants to join your crew"
+          loss:
+            hp: [10, 10]
+            crew: [2, 5]
+            comment: "The giant is not something you can reason with, he hists your ship with his lava fist giving considerable damage. You barely escape loosing some of your crew"
+            
+            
+  - description: |
+      The island seems to be deserted. You send the expedition but nobody returns. What do you do?
+    options:
+      - label: "Send another expedition"
+        outcome:
+          type: "quest"
+          chance: 0.3
+          loss:
+            hp: [0, 0]
+            crew: [2, 5]
+            comment: "Giant yells FAGGOT"
+          gain:
+            hp: [0, 0]
+            crew: [2, 7]

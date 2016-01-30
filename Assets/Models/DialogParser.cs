@@ -32,11 +32,6 @@ public class DialogParser : MonoBehaviour {
 
     }
 
-    class DialogsRoot
-    {
-        public List<Dialog> Dialogs { get; set; }
-    }
-
     private const string Document = @"---
         dialogs:
           - description: |
