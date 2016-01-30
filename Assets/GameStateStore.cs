@@ -18,10 +18,13 @@ public class GameStateStore
     public static GameStateStore Instance {
         get {
             if (_instance == null)
-                _instance = new GameStateStore {
+            {
+                _instance = new GameStateStore
+                {
                     OverworldState = new OverworldState(),
                     CardDeck = new CardDeck()
                 };
+            }
             return _instance;
         }
     }
@@ -40,8 +43,6 @@ public class GameStateStore
         if (OnStateCHange != null) {
             OnStateCHange ();
         }
-
-
     }
 
     private GameStateStore ()

@@ -9,19 +9,15 @@ public class TextPanelBehaviour : MonoBehaviour
     public Dialog Dialog { get; private set; }
     private Text text;
     private bool started;
-    private List<Transform> buttons;
-    private Action<DialogOption> _handleOption;
+    private Transform button;
+    private Action _startBattle;
 
     // Use this for initialization
     void Start()
     {
         started = true;
         text = transform.GetChild(0).GetComponent<Text>();
-        buttons = new List<Transform>();
-        foreach (Transform button in transform.GetChild(1))
-        {
-            buttons.Add(button);
-        }
+        button = transform.GetChild(1);
         guid = Guid.NewGuid();
     }
     
@@ -31,25 +27,14 @@ public class TextPanelBehaviour : MonoBehaviour
         if (!started) Start();
         Dialog = dialog;
         text.text = Dialog.Description;
-
-        for (int i = 0; i < buttons.Count; i++)
-        {
-            try
-            {
-                var opt = Dialog.Options[i];
-                buttons[i].GetComponent<CanvasGroup>().alpha = 1;
-                buttons[i].GetChild(0).GetComponent<Text>().text = opt.Label;
-                buttons[i].GetComponent<Button>().onClick.AddListener(delegate { _handleOption(opt); });
-            }
-            catch (ArgumentOutOfRangeException _)
-            {
-                buttons[i].GetComponent<CanvasGroup>().alpha = 0;
-            }
-        }
+        button.GetComponent<CanvasGroup>().alpha = 1;
+        button.GetChild(0).GetComponent<Text>().text = "Fight";
+        button.GetComponent<Button>().onClick.AddListener(() => _startBattle());
+        
     }
 
-    public void SelectionCallback(Action<DialogOption> handleOption)
+    public void SelectionCallback(Action startBattle)
     {
-        _handleOption = handleOption;
+        _startBattle = startBattle;
     }
 }
