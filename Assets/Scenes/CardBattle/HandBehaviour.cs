@@ -35,8 +35,10 @@ public class HandBehaviour : MonoBehaviour
     public Text opponentHealth;
     public Text playerHealthChange;
     public Text opponentHealthChange;
+    public GameObject helpPanel;
 
     public GameObject winningIndicator;
+    public GameObject winningIndicatorPanel;
     public float cardResolutionLag;
     private CanvasGroup cardDescriptionContainerCanvasGroup;
 
@@ -94,7 +96,8 @@ public class HandBehaviour : MonoBehaviour
     private void HoveredOver (Transform transform)
     {
         var cardBehaviour = transform.GetComponent<CardBehaviour> ();
-        cardDescription.text = "<b>" + cardBehaviour.Card.Name + "</b>\n" + cardBehaviour.Card.Description;
+        var rarity = cardBehaviour.Card.Rarity.ToString ().Substring (0, 1);
+        cardDescription.text = "<b>" + cardBehaviour.Card.Name + "<i>(" + rarity + ")</i></b>\n" + cardBehaviour.Card.Description;
         cardDescriptionContainerCanvasGroup.DOFade (1.0f, 0.5f);
 
     }
@@ -173,6 +176,7 @@ public class HandBehaviour : MonoBehaviour
     {
         var cardBehaviour = opponentCard.GetComponent<CardBehaviour> ();
         cardBehaviour.Init (OpponentCardRepository.DrawCard (), cards.Count);
+        opponentCard.transform.SetAsLastSibling ();
         SetOpponentCardVisibility (true);
         HandleOpponentAction ();
     }
@@ -273,6 +277,28 @@ public class HandBehaviour : MonoBehaviour
         StartCoroutine (ResolveCard ());
     }
 
+    public void HideHelp ()
+    {
+        StartCoroutine (HideHelpPanel ());
+    }
+
+    public void ShowHelp ()
+    {
+        StartCoroutine (ShowHelpPanel ());
+    }
+
+    private IEnumerator HideHelpPanel ()
+    {
+        yield return helpPanel.transform.GetComponent<CanvasGroup> ().DOFade (0.0f, 0.75f).WaitForCompletion ();
+        helpPanel.GetComponent<CanvasGroup> ().blocksRaycasts = false;
+    }
+
+    private IEnumerator ShowHelpPanel ()
+    {
+        helpPanel.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+        yield return helpPanel.transform.GetComponent<CanvasGroup> ().DOFade (0.75f, 0.75f).WaitForCompletion ();
+    }
+
     private IEnumerator ResolveCard ()
     {
         var result = cardReducer.ResolveCard (PlayerCard ().GetComponent<CardBehaviour> ().Card, opponentCard.GetComponent<CardBehaviour> ().Card, skirmishModifiers);
@@ -332,6 +358,7 @@ public class HandBehaviour : MonoBehaviour
     {
         var playerWon = healthTracker.PlayerHealth > 0;
         var winningGamer = playerWon ? "Player" : "Opponent";
+        winningIndicatorPanel.GetComponent<CanvasGroup> ().DOFade (1.0f, 0.5f);
         winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer);
         BackToMap ();
     }

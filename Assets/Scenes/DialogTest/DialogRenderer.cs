@@ -12,8 +12,6 @@ using Adic;
 
 public class DialogRenderer : MonoBehaviour
 {
-    [Inject]
-    public DialogEngine dialogEngine;
 
     [Inject]
     public GameStateStore Store { get; set; }
@@ -45,12 +43,7 @@ public class DialogRenderer : MonoBehaviour
         dialogPanel.transform.SetParent(target.transform);
         dialogPanel.localPosition = Vector3.zero;
         var textPanelBehaviour = dialogPanel.GetComponent<TextPanelBehaviour>();
-        textPanelBehaviour.SelectionCallback(HandleOption(dialog));
+        textPanelBehaviour.SelectionCallback(() => Store.AdvanceState(Scenes.CardBattle));
         textPanelBehaviour.SetDialog(dialog);
-    }
-
-    private Action<DialogOption> HandleOption(Dialog dialog)
-    {
-        return opt => dialogEngine.Handle(dialog, opt);
     }
 }
