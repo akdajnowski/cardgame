@@ -19,7 +19,8 @@ public class GameRoot : ContextRoot
                 .Bind<BattleHealthTracker>().ToSingleton()
                 .Bind<GameStateStore>().ToFactory<GlobalStateFactory>()
                 .Bind<DialogEngine>().ToSingleton()
-                .Bind<CardAssetsProvider>().ToSingleton();
+                .Bind<CardAssetsProvider>().ToSingleton()
+                .Bind<ShiftScene>().ToSingleton();
 
         //Bind a Transform component to the two cubes on the scene, using a "As" condition
         //to define their identifiers.
