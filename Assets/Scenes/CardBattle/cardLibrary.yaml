@@ -8,7 +8,7 @@
     quantity: 1
 - name: Sword and shield
   description: Attack the enemy with a sword and shield.
-  cardImage: sword_diag
+  cardImage: swords_shield
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -31,20 +31,13 @@
     quantity: 2
 - name: Boarding party
   description: Get onto their ship and kill 'em all!
-  cardImage: sword_diag
+  cardImage: swords_shield
   rarity: Common
   cardAttributes:
   - quality: Attack
     quantity: 1
   - quality: Defense
     quantity: 1
-- name: Cannon ball salve
-  description: FIRE AT WILL!
-  cardImage: icons_7
-  rarity: Common
-  cardAttributes:
-  - quality: Attack
-    quantity: 2
 - name: Tarnkappe
   description: Sigurd's magical cloak that made the wearer invisible.
   cardImage: mail
@@ -183,15 +176,6 @@
     quantity: 2
   - quality: Heal
     quantity: 1
-#- name: Járngreipr
-#  description: A pair of iron gauntlets of the god Thor.
-#  cardImage: icons_9
-#  rarity: Uncommon
-#  cardAttributes:
-#  - quality: MagicAttack
-#    quantity: 2
-#  - quality: MagicDefense
-#    quantity: 2
 - name: Brísingamen
   description: The necklace of the goddess Freya.
   cardImage: necklace
@@ -203,7 +187,7 @@
     quantity: 1
 - name: Helskór
   description: Also known as Hel-shoes, were put on the dead so that they could go to Valhöll.
-  cardImage: icons_9
+  cardImage: shoe
   rarity: Uncommon
   cardAttributes:
   - quality: MagicDefense
@@ -212,7 +196,7 @@
     quantity: 2
 - name: Shoes of Víðarr
   description: These shoes gave the god Vidar unparalleled foot protection.
-  cardImage: icons_9
+  cardImage: shoe
   rarity: Uncommon
   cardAttributes:
   - quality: MagicDefense
@@ -296,7 +280,7 @@
     quantity: 1
 - name: Eitr
   description: This liquid substance is the origin of all living things. The first giant Ymir was conceived from eitr. The substance is supposed to be very poisonous and is also produced by Jörmungandr and other serpents.
-  cardImage: icons_5
+  cardImage: liquid
   rarity: Uncommon
   cardAttributes:
   - quality: Heal
@@ -304,7 +288,7 @@
 # RARE (5+ attributes)
 - name: Thor's might
   description: Thor has returned your prayers and gave you godlike power.
-  cardImage: icons_4
+  cardImage: mjornir
   rarity: Rare
   cardAttributes:
   - quality: MagicAttack
@@ -313,7 +297,7 @@
     quantity: 3
 - name: Blid's support
   description: A massive storm that destroy's your enemies and allows you to heal.
-  cardImage: icons_0
+  cardImage: liquid
   rarity: Rare
   cardAttributes:
   - quality: MagicAttack
@@ -322,7 +306,7 @@
     quantity: 2
 - name: Odin's wrath
   description: The god of war grants you his blessings to defeat your foes.
-  cardImage: icons_3
+  cardImage: axe
   rarity: Rare
   cardAttributes:
   - quality: MagicAttack
@@ -331,7 +315,7 @@
     quantity: 2
 - name: Iounn's help
   description: You are granted with the gift of ethernal youth.
-  cardImage: icons_5
+  cardImage: liquid
   rarity: Rare
   cardAttributes:
   - quality: Heal
@@ -357,19 +341,4 @@
   - quality: Attack
     quantity: 3
   - quality: Heal
-    quantity: 2
-# TEMPLATE
-- name: CARD TEMPLATE
-  description: TEST DESCRIPTION
-  cardImage: icons_9
-  cardAttributes:
-  - quality: Attack
-    quantity: 1
-  - quality: Defense
-    quantity: 1
-  - quality: MagicAttack
-    quantity: 1
-  - quality: MagicDefense
-    quantity: 1
-  - quality: Heal
-    quantity: 1
+    quantity: 
