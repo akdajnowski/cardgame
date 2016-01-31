@@ -1,18 +1,16 @@
 ﻿---
 dialogs:
-  - id: "Bifrost"
-    description: |
+ - id: "Bifrost"
+   description: |
       The great volcano eruption tears the island apart as soon as you approach it. You stare at rivers of lava and through the shroud of thick smoke. You could swear that lava starts to pile up and take a human-shaped form.
       "It's a lava giant!" the second mate cries.
       The lava pile is over 15 foot tall now. Inside the head-shaped bubble on the top the mouth like hole opens and deafening roar tears the air. The monster starts approaching your ship. There's little time to make decisions"
    toBattle: true
  - id: "Yggdrasil"
-   description: >
-      This is Yggdrasil. The island seems to be deserted. You send the expedition but they are attacked by a local tribe.
+   description: This is Yggdrasil. The island seems to be deserted. You send the expedition but they are attacked by a local tribe.
    toBattle: true
  - id: "HauntedShip"
-   description: >
-      This is a Haunted Ship. As soon as you set foot on it's deck you are attacked by a group of dead vikings.
+   description: This is a Haunted Ship. As soon as you set foot on it's deck you are attacked by a group of dead vikings.
    toBattle: true
  - id: "OdinEye"
    description: >
@@ -21,10 +19,8 @@ dialogs:
       You carefully navigate through rocks and drop anchor in a bay. When your men step on the ground the army of trolls come out of nowhere and attack.
    toBattle: true
  - id: "Singasteinn"
-   description: >
-      This is Singasteinn. The island is inhabited by dwarves. They promise to repair your ship if you help them get rid of giant lizard.
+   description: This is Singasteinn. The island is inhabited by dwarves. They promise to repair your ship if you help them get rid of giant lizard.
    toBattle: true
  - id: "Wreckage"
-   description: >
-      This is a wreckage.
+   description: This is a wreckage.
    toBattle: false
