@@ -1,7 +1,7 @@
 # COMMON (1-2 attributes)
 - name: Sword attack
   description: Use your viking swords to attack the enemy.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -24,7 +24,7 @@
     quantity: 2
 - name: Arrow salve
   description: Release arrows!
-  cardImage: icons_1
+  cardImage: arrows
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -56,21 +56,21 @@
     quantity: 1	
 - name: Angurvadal
   description: A magical sword of Viking, and later Frithiof. The sword was inscribed with Runic letters, which blazed in time of war, but gleamed with a dim light in time of peace.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: MagicAttack
     quantity: 2
 - name: Dáinsleif
   description: King Högni's sword, according to Snorri Sturluson's account of the battle known as the Hjaðningavíg.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: Attack
     quantity: 2
 - name: Mistilteinn
   description: The magical sword of Prainn, the draugr, later owned by Hromundr Gripsson.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: MagicAttack
@@ -79,21 +79,21 @@
     quantity: 1
 - name: Ridill
   description: Sword of the dwarf Regin.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: Attack
     quantity: 2
 - name: Skofnung
   description: A sword with mythical properties associated with the legendary Danish king Hrólf Kraki.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: MagicAttack
     quantity: 2
 - name: Tyrfing
   description: The cursed sword of Svafrlami, from the Elder Edda; also said to be the sword of Odin in Richard Wagner's works.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -142,7 +142,7 @@
     quantity: 3
 - name: Dual swords
   description: Wield two swords and slain your enemies.
-  cardImage: icons_1
+  cardImage: two_swords_diag
   rarity: Uncommon
   cardAttributes:
   - quality: Attack
@@ -219,14 +219,14 @@
     quantity: 3
 - name: Freyr's Sword
   description: Freyr's magic sword which fought on its own. It might be Lævateinn.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Uncommon
   cardAttributes:
   - quality: MagicAttack
     quantity: 3
 - name: Hrotti
   description: The sword is mentioned in the Völsung cycle. It was part of Fáfnir's treasure, which Sigurðr took after he slew the dragon.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Uncommon
   cardAttributes:
   - quality: MagicAttack
@@ -235,7 +235,7 @@
   - quantity: 1
 - name: Gram
   description: The sword that Odin struck into the Branstock tree which only Sigmund the Völsung was able to pull out. It broke in battle with Odin but was later reforged by Sigmund's son Sigurd and used it to slay the dragon Fafnir. After being reforged, it could cleave an anvil in half.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Uncommon
   cardAttributes:
   - quality: Heal
@@ -244,7 +244,7 @@
     quantity: 2
 - name: Quern-biter
   description: Sword of Haakon I of Norway and his follower, Thoralf Skolinson the Strong, said to be sharp enough to cut through quernstones.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Uncommon
   cardAttributes:
   - quality: Attack
@@ -287,7 +287,7 @@
     quantity: 2	
 - name: Ichaival
   description: A bow possessed by Odin. Another source said it was came from Ydalir, the home of the god Ullr. It possessed the power of each pull of just one arrow, it will release ten arrows.
-  cardImage: icons_9
+  cardImage: arrow
   rarity: Uncommon
   cardAttributes:
   - quality: Attack
@@ -303,7 +303,7 @@
     quantity: 3
 # RARE (5+ attributes)
 - name: Thor's might
-  description: Thos has returned your prayers and gave you godlike power.
+  description: Thor has returned your prayers and gave you godlike power.
   cardImage: icons_4
   rarity: Rare
   cardAttributes:
@@ -320,7 +320,7 @@
     quantity: 3
   - quality: Heal
     quantity: 2
-- name: Odin's war
+- name: Odin's wrath
   description: The god of war grants you his blessings to defeat your foes.
   cardImage: icons_3
   rarity: Rare
