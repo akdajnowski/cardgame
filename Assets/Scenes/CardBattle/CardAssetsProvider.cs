@@ -20,6 +20,7 @@ public class CardAssetsProvider
 
     public Sprite GetSpriteFromPath (string path)
     {
+        Debug.Log("file asset path: " + path);
         return Icons.First (x => x.name == path);
     }
 
