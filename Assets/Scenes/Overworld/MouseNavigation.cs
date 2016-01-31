@@ -15,7 +15,7 @@ public class MouseNavigation : MonoBehaviour
     void Start()
     {
         this.Inject();
-        if (GameStore.OverworldState != null)
+        if (GameStore.OverworldState != null && GameStore.OverworldState.CurrentIsland != null)
         {
             transform.position = GameStore.OverworldState.ShipPosition;
             transform.rotation = GameStore.OverworldState.ShipRotation;

@@ -16,7 +16,7 @@ public class TextPanelBehaviour : MonoBehaviour
     void Start()
     {
         started = true;
-        text = transform.GetChild(0).GetComponent<Text>();
+        text = transform.GetChild(0).GetChild(0).GetComponent<Text>();
         button = transform.GetChild(1);
         guid = Guid.NewGuid();
     }
