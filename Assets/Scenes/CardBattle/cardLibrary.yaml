@@ -116,7 +116,7 @@
     quantity: 1	
 - name: Singasteinn
   description: An old norse singing stone, an object that appears in the account of Loki and Heimdallr's fight in the form of seals.
-  cardImage: icons_9
+  cardImage: rock
   rarity: Common
   cardAttributes:
   - quality: MagicDefense
@@ -176,25 +176,25 @@
     quantity: 2
 - name: Megingjörð
   description: A magic belt worn by the god Thor.
-  cardImage: icons_9
+  cardImage: belt
   rarity: Uncommon
   cardAttributes:
   - quality: MagicAttack
     quantity: 2
   - quality: Heal
     quantity: 1
-- name: Járngreipr
-  description: A pair of iron gauntlets of the god Thor.
-  cardImage: icons_9
-  rarity: Uncommon
-  cardAttributes:
-  - quality: MagicAttack
-    quantity: 2
-  - quality: MagicDefense
-    quantity: 2
+#- name: Járngreipr
+#  description: A pair of iron gauntlets of the god Thor.
+#  cardImage: icons_9
+#  rarity: Uncommon
+#  cardAttributes:
+#  - quality: MagicAttack
+#    quantity: 2
+#  - quality: MagicDefense
+#    quantity: 2
 - name: Brísingamen
   description: The necklace of the goddess Freya.
-  cardImage: icons_9
+  cardImage: necklace
   rarity: Uncommon
   cardAttributes:
   - quality: MagicDefense
@@ -278,7 +278,7 @@
     quantity: 2
 - name: Gjöll
   description: The name of the rock which Fenrir the wolf is bound.
-  cardImage: icons_9
+  cardImage: rock
   rarity: Uncommon
   cardAttributes:
   - quality: Attack
