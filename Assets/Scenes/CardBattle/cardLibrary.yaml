@@ -17,7 +17,7 @@
     quantity: 1
 - name: Axe berserker
   description: Find your inner fury and destroy your enemies.
-  cardImage: icons_3
+  cardImage: axe
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -107,7 +107,7 @@
     quantity: 2
 - name: Holly Dart
   description: A Holly Dart obtained from Loki killed Baldr, the son of Loki's brother.
-  cardImage: icons_9
+  cardImage: arrow
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -149,7 +149,7 @@
     quantity: 3
 - name: Defensive repairs
   description: Hide and fix!
-  cardImage: icons_2
+  cardImage: shield
   rarity: Uncommon
   cardAttributes:
   - quality: Defense
