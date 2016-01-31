@@ -7,6 +7,8 @@ public class ShiftScene : MonoBehaviour
 {
     [Inject]
     public GameStateStore Store { get; set; }
+
+    public Scenes Scene = Scenes.Overworld;
     // Use this for initialization
     void Start ()
     {
@@ -18,7 +20,7 @@ public class ShiftScene : MonoBehaviour
     void Update ()
     {
         if (Mouse.IsLeftMouseButtonIsClicked) {
-            Store.AdvanceState (Scenes.Overworld);
+            Store.AdvanceState (Scene);
         }
     }
 }

@@ -13,6 +13,7 @@ public enum Scenes : int
     MainMenu,
     Overworld,
     CardBattle,
-    GameOver
+    GameOver,
+    EndCredits
 }
 

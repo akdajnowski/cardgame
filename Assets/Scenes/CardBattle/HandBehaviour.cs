@@ -367,7 +367,11 @@ public class HandBehaviour : MonoBehaviour
         winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer);
         if (playerWon) {
             CardRepository.GetRareCardsFromOpponent ();
-            BackToMap ();
+            if (store.OverworldState.CurrentIsland == "Yggdrasil") {
+                store.AdvanceState (Scenes.EndCredits);
+            } else {
+                BackToMap ();
+            }
         } else {
             store.AdvanceState (Scenes.GameOver);
         }
