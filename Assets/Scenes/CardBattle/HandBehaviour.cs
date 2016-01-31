@@ -361,6 +361,10 @@ public class HandBehaviour : MonoBehaviour
         var winningGamer = playerWon ? "Player" : "Opponent";
         winningIndicatorPanel.GetComponent<CanvasGroup> ().DOFade (1.0f, 0.5f);
         winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer);
+        if (playerWon)
+        {
+            CardRepository.GetRareCardsFromOpponent();
+        }
         BackToMap ();
     }
 

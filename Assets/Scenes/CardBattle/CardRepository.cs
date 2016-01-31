@@ -18,6 +18,7 @@ public class CardRepository
         // to refactor
         if (_deck.Count == 0) {
             FillDeck ();
+            ShuffleDeck();
         }
 
         var card = _deck.Pop ();
@@ -34,10 +35,33 @@ public class CardRepository
         var cards = GameStateStore.Instance.GetRandomCards (rare, CardDescriptor.CardRarity.Rare);
         cards.AddRange (GameStateStore.Instance.GetRandomCards (uncommon, CardDescriptor.CardRarity.Uncommon));
         cards.AddRange (GameStateStore.Instance.GetRandomCards (common, CardDescriptor.CardRarity.Common));
-        System.Random r = new System.Random ();
-        cards = cards.OrderBy (i => r.Next ()).ToList ();
-        foreach (var card in cards) {
-            _deck.Push (card);
+        
+        foreach (var card in cards)
+        {
+            _deck.Push(card);
+        }
+    }
+
+    public static void GetRareCardsFromOpponent(int number = 1)
+    {
+        var cards = OpponentCardRepository.GetRareCards(number);
+        foreach (var card in cards)
+        {
+            _deck.Push(card);
+        }
+        ShuffleDeck();
+    }
+
+    private static void ShuffleDeck()
+    {
+        var cards = _deck.ToList();
+        System.Random r = new System.Random();
+        cards = cards.OrderBy(i => r.Next()).ToList();
+
+        _deck.Clear();
+        foreach (var card in cards)
+        {
+            _deck.Push(card);
         }
     }
 }
