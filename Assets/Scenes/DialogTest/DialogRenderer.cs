@@ -18,7 +18,6 @@ public class DialogRenderer : MonoBehaviour
 
     public TextAsset dialogAsset;
     public Transform DialogPanel;
-    public Transform target;
     private DialogsRoot dialogs;
 
 
@@ -30,7 +29,7 @@ public class DialogRenderer : MonoBehaviour
         var input = new StringReader(dialogAsset.text);
         dialogs = deserializer.Deserialize<DialogsRoot>(input);
 
-        string currentIsland = Store.OverworldState.CurrentIsland.ToLower();
+        string currentIsland = Store.OverworldState.CurrentIsland;
 
 
         var dialog = dialogs.Dialogs.First(x => x.Id == currentIsland);
@@ -39,10 +38,7 @@ public class DialogRenderer : MonoBehaviour
 
     private void Render(Dialog dialog)
     {
-        var dialogPanel = Instantiate(DialogPanel);
-        dialogPanel.transform.SetParent(target.transform);
-        dialogPanel.localPosition = Vector3.zero;
-        var textPanelBehaviour = dialogPanel.GetComponent<TextPanelBehaviour>();
+        var textPanelBehaviour = DialogPanel.GetComponent<TextPanelBehaviour>();
         textPanelBehaviour.SelectionCallback(() => Store.AdvanceState(Scenes.CardBattle));
         textPanelBehaviour.SetDialog(dialog);
     }

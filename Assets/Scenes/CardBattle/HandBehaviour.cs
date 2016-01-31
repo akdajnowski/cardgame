@@ -356,11 +356,18 @@ public class HandBehaviour : MonoBehaviour
 
     private void HandleGameEnd ()
     {
-        var playerWon = healthTracker.PlayerHealth > 0;
-        var winningGamer = playerWon ? "Player" : "Opponent";
-        winningIndicatorPanel.GetComponent<CanvasGroup> ().DOFade (1.0f, 0.5f);
-        winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer);
-        BackToMap ();
+        bool playerWon = healthTracker.PlayerHealth > 0;
+        if (!playerWon)
+        {
+            store.AdvanceState(Scenes.GameOver);
+        }
+        else
+        {
+
+            //winningIndicatorPanel.GetComponent<CanvasGroup> ().DOFade (1.0f, 0.5f);
+            //winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer);
+            BackToMap();
+        }
     }
 
     private void BackToMap ()

@@ -14,5 +14,6 @@ public enum Scenes : int
     Dialog,
     Overworld,
     CardBattle,
+    GameOver
 }
 
