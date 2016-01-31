@@ -19,6 +19,6 @@ public class WinningIndicator : MonoBehaviour
 
     public void ShowWinner (string winner)
     {
-        text.text = winner + " won";
+        text.text = winner;
     }
 }
