@@ -1812,6 +1812,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1730372255}
   - 114: {fileID: 1730372254}
+  - 114: {fileID: 1730372256}
   m_Layer: 0
   m_Name: DialogRenderer
   m_TagString: Untagged
@@ -1844,6 +1845,18 @@ Transform:
   - {fileID: 153682278}
   m_Father: {fileID: 0}
   m_RootOrder: 10
+--- !u!114 &1730372256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730372253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca3aa3d3f8364a4a8d47cba015c8df2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogAsset: {fileID: 4900000, guid: 536de782575d18e43a86723891e0afce, type: 3}
 --- !u!1 &1748922025
 GameObject:
   m_ObjectHideFlags: 0
