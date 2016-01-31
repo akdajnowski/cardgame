@@ -3,21 +3,21 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using Adic;
 
-public class ShiftScene : MonoBehaviour {
+public class ShiftScene : MonoBehaviour
+{
     [Inject]
     public GameStateStore Store { get; set; }
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-        this.Inject();
+        this.Inject ();
     }
 	
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update ()
     {
-	    if(Mouse.IsLeftMouseButtonIsClicked)
-        {
-            Store.AdvanceState(Scenes.MainMenu);
+        if (Mouse.IsLeftMouseButtonIsClicked) {
+            Store.AdvanceState (Scenes.Overworld);
         }
-	}
+    }
 }

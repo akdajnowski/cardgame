@@ -61,6 +61,7 @@ public class HandBehaviour : MonoBehaviour
         ShowPlayerHealth();
         cards = new List<GameObject>();
         cardDescriptionContainerCanvasGroup = cardDescriptionContainer.GetComponent<CanvasGroup>();
+
     }
 
     // Update is called once per frame
