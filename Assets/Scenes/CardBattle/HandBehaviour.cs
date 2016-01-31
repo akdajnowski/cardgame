@@ -362,7 +362,7 @@ public class HandBehaviour : MonoBehaviour
     {
 
         var playerWon = healthTracker.PlayerHealth > 0;
-        var winningGamer = playerWon ? "Player" : "Opponent";
+        var winningGamer = "Ritual " + (playerWon ? "completed" : "failed");
         winningIndicatorPanel.GetComponent<CanvasGroup> ().DOFade (1.0f, 0.5f);
         winningIndicator.GetComponent<WinningIndicator> ().ShowWinner (winningGamer);
         if (playerWon) {
