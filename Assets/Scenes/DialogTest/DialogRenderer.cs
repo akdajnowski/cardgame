@@ -9,7 +9,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using Adic;
-
 public class DialogRenderer : MonoBehaviour
 {
 
@@ -17,9 +16,11 @@ public class DialogRenderer : MonoBehaviour
     public GameStateStore Store { get; set; }
 
     public TextAsset dialogAsset;
-    public Transform DialogPanel;
     private DialogsRoot dialogs;
-
+    private Text text;
+    private CanvasGroup cg;
+    private Button button;
+    private Text buttonText;
 
     // Use this for initialization
     void Start()
@@ -28,10 +29,22 @@ public class DialogRenderer : MonoBehaviour
         var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
         var input = new StringReader(dialogAsset.text);
         dialogs = deserializer.Deserialize<DialogsRoot>(input);
+        var panel = transform.GetChild(0).GetChild(0).GetChild(0);
+        button = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Button>();
+        buttonText = button.transform.GetChild(0).GetComponent<Text>();
+        text = panel.GetComponent<Text>();
+        cg = transform.GetChild(0).GetChild(0).GetComponent<CanvasGroup>();
+        Alpha = 0;
+    }
 
-        string currentIsland = Store.OverworldState.CurrentIsland;
+    public float Alpha
+    {
+        get { return cg.alpha; }
+        set { cg.alpha = value; }
+    }
 
-
+    public void RunDialog(string currentIsland)
+    {
         var dialog = dialogs.Dialogs.FirstOrDefault(x => x.Id == currentIsland);
         if (dialog == null)
             throw new DialogMissingException(currentIsland);
@@ -40,9 +53,19 @@ public class DialogRenderer : MonoBehaviour
 
     private void Render(Dialog dialog)
     {
-        var textPanelBehaviour = DialogPanel.GetComponent<TextPanelBehaviour>();
-        textPanelBehaviour.SelectionCallback(() => Store.AdvanceState(Scenes.CardBattle));
-        textPanelBehaviour.SetDialog(dialog);
+        button.onClick.RemoveAllListeners();
+        if (dialog.ToBattle ?? true)
+        {
+            buttonText.text = "Fight";
+            button.onClick.AddListener(() => Store.AdvanceState(Scenes.CardBattle));
+        }
+        else
+        {
+            buttonText.text = "Continue";
+            button.onClick.AddListener(() => DOTween.To(() => Alpha, x => Alpha = x, 1, 1f));
+        }
+
+        text.text = dialog.Description;
     }
 
     public class DialogMissingException : Exception

@@ -18,6 +18,7 @@ public class GameRoot : ContextRoot
                 .Bind<CardReducer>().ToSingleton()
                 .Bind<BattleHealthTracker>().ToSingleton()
                 .Bind<CursorApplier>().ToGameObjectWithTag("MainCamera")
+                .Bind<Transform>().ToGameObject("DialogRenderer").As("DialogRenderer")
                 .Bind<GameStateStore>().ToFactory<GlobalStateFactory>()
 
                 .Bind<CardAssetsProvider>().ToSingleton();

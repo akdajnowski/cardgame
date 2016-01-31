@@ -7,17 +7,24 @@ public class WorldEventPlaceBehaviour : MonoBehaviour
     [Inject]
     public GameStateStore Store { get; set; }
 
-    void Start() { this.Inject(); }
+    [Inject("DialogRenderer")]
+    public Transform dialogRenderer;
+    private DialogRenderer script;
 
-    void CollisionPerform(string stuff)
+    void Start() {
+        this.Inject();
+        script= dialogRenderer.GetComponent<DialogRenderer>();
+    }
+
+    void CollisionPerform(string islandKey)
     {
         var visitedDictionary = Store.OverworldState.VisitedIslands;
-        if (!visitedDictionary.ContainsKey(stuff) || !visitedDictionary[stuff])
+        if (!visitedDictionary.ContainsKey(islandKey) || !visitedDictionary[islandKey])
         {
-            visitedDictionary[stuff] = true;
-            Debug.Log("We encountered: " + stuff);
-            Store.OverworldState.CurrentIsland = stuff;
-            Store.AdvanceState(Scenes.Dialog);
+            visitedDictionary[islandKey] = true;
+            Debug.Log("We encountered: " + islandKey);
+            Store.OverworldState.CurrentIsland = islandKey;
+            script.RunDialog(islandKey);
         }
     }
 }
