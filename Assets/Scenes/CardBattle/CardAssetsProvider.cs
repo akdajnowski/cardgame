@@ -10,7 +10,7 @@ public class CardAssetsProvider
     public CardAssetsProvider ()
     {
         Icons = Resources.LoadAll ("icons").OfType<Sprite> ().ToList ();
-        Icons.Add (Resources.Load<Sprite> ("mjornir"));
+        Icons.AddRange (LoadSprites ("mjornir", "arrow", "arrows", "sword_diag", "two_swords_diag"));
         Debug.Log (Icons.Count.ToString ());
     }
 
@@ -22,5 +22,10 @@ public class CardAssetsProvider
     public Sprite GetSpriteFromPath (string path)
     {
         return Icons.First (x => x.name == path);
+    }
+
+    private IEnumerable<Sprite> LoadSprites (params string[] names)
+    {
+        return names.Select (name => Resources.Load<Sprite> (name));
     }
 }
