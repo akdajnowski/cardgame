@@ -47,7 +47,7 @@
     quantity: 2
 - name: Tarnkappe
   description: Sigurd's magical cloak that made the wearer invisible.
-  cardImage: icons_9
+  cardImage: mail
   rarity: Common
   cardAttributes:
   - quality: Defense
@@ -135,7 +135,7 @@
     quantity: 1
 - name: Shield wall
   description: Keep formation!
-  cardImage: icons_2
+  cardImage: shield
   rarity: Uncommon
   cardAttributes:
   - quality: Defense
@@ -158,7 +158,7 @@
     quantity: 2	
 - name: Armour of Beowulf
   description: A mail shirt made by Wayland the Smith.
-  cardImage: icons_4
+  cardImage: mail
   rarity: Uncommon
   cardAttributes:
   - quality: Defense
@@ -167,7 +167,7 @@
     quantity: 1
 - name: Svalinn
   description: A shield which stands before the sun and protects earth from burning.
-  cardImage: icons_2
+  cardImage: shield
   rarity: Uncommon
   cardAttributes:
   - quality: Defense
@@ -342,7 +342,7 @@
     quantity: 1
 - name: Skaoi's salve
   description: The magic bow of Skaoi's targets your opponents.
-  cardImage: sword_diag
+  cardImage: arrows
   rarity: Rare
   cardAttributes:
   - quality: MagicAttack
