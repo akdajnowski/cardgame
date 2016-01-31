@@ -8,7 +8,7 @@
     quantity: 1
 - name: Sword and shield
   description: Attack the enemy with a sword and shield.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -31,7 +31,7 @@
     quantity: 2
 - name: Boarding party
   description: Get onto their ship and kill 'em all!
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -126,7 +126,7 @@
 # UNCOMMON (3-4 attributes)
 - name: Spear attack
   description: Keep your enemy at a distance.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Uncommon
   cardAttributes:
   - quality: Attack
@@ -342,7 +342,7 @@
     quantity: 1
 - name: Skaoi's salve
   description: The magic bow of Skaoi's targets your opponents.
-  cardImage: icons_1
+  cardImage: sword_diag
   rarity: Rare
   cardAttributes:
   - quality: MagicAttack

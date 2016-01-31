@@ -5,14 +5,26 @@ dialogs:
       The great volcano eruption tears the island apart as soon as you approach it. You stare at rivers of lava and through the shroud of thick smoke. You could swear that lava starts to pile up and take a human-shaped form.
       "It's a lava giant!" the second mate cries.
       The lava pile is over 15 foot tall now. Inside the head-shaped bubble on the top the mouth like hole opens and deafening roar tears the air. The monster starts approaching your ship. There's little time to make decisions"
-  - id: "deserted"
-    description: |
-      The island seems to be deserted. You send the expedition but nobody returns. What do you do?
-  - id: "foggy"
-    description: >
-      The island is sunken in deep fog covering giant rocks emerging from sea near the shore line. The shore is spiked with crashed ships wreckages. This fog is not natural.
+   toBattle: true
+ - id: "Yggdrasil"
+   description: >
+      This is Yggdrasil. The island seems to be deserted. You send the expedition but they are attacked by a local tribe.
+   toBattle: true
+ - id: "HauntedShip"
+   description: >
+      This is a Haunted Ship. As soon as you set foot on it's deck you are attacked by a group of dead vikings.
+   toBattle: true
+ - id: "OdinEye"
+   description: >
+      This is Odin's Eye. The island is sunken in deep fog covering giant rocks emerging from sea near the shore line. The shore is spiked with crashed ships wreckages. This fog is not natural.
       You look at your 1st mate. His face is tense.  He tells you a story he heard of this island. Of great treasures laying beyond guarded by terrifying dark forces.
       You carefully navigate through rocks and drop anchor in a bay. When your men step on the ground the army of trolls come out of nowhere and attack.
-  - id: "dwarves"
-    description: >
-      The island is inhabitet by dwarves. They promise to repair your ship if you help them get rid of giant lizard.
+   toBattle: true
+ - id: "Singasteinn"
+   description: >
+      This is Singasteinn. The island is inhabited by dwarves. They promise to repair your ship if you help them get rid of giant lizard.
+   toBattle: true
+ - id: "Wreckage"
+   description: >
+      This is a wreckage.
+   toBattle: false
