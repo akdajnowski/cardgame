@@ -11,6 +11,7 @@ public class ShiftScene : MonoBehaviour
     void Start ()
     {
         this.Inject ();
+        Debug.Log ("Shift Scene behaviour injected");
     }
 	
     // Update is called once per frame

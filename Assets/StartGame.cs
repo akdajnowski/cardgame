@@ -2,19 +2,21 @@
 using System.Collections;
 using Adic;
 
-public class StartGame : MonoBehaviour {
+public class StartGame : MonoBehaviour
+{
 
     [Inject]
     public GameStateStore Store { get; set; }
 
-    public void Start()
+    public void Start ()
     {
-        this.Inject();
+        this.Inject ();
+        Debug.Log ("Start Game behaviour injected");
     }
-	
-    public void Apply()
+
+    public void Apply ()
     {
-        Store.AdvanceState(Scenes.Overworld);
-        Debug.Log("Weszłem");
+        Store.AdvanceState (Scenes.Overworld);
+        Debug.Log ("Weszłem");
     }
 }
