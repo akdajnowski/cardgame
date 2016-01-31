@@ -158,7 +158,7 @@ public class HandBehaviour : MonoBehaviour
 
     private void ChoosePlayer ()
     {
-        firstPlayer = new System.Random ().Next (2) == 1 ? ActivePlayer.Opponent : ActivePlayer.Player;
+        firstPlayer = ActivePlayer.Opponent;
         NewTurn ();
     }
 
