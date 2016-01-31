@@ -24,53 +24,68 @@ public class DialogRenderer : MonoBehaviour
     private Text buttonText;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        this.Inject ();
-        Debug.Log ("Dialog Renderer behaviour injected");
-        var deserializer = new Deserializer (namingConvention: new CamelCaseNamingConvention ());
-        var input = new StringReader (dialogAsset.text);
-        dialogs = deserializer.Deserialize<DialogsRoot> (input);
-        var panel = transform.GetChild (0).GetChild (0).GetChild (0);
-        button = transform.GetChild (0).GetChild (0).GetChild (1).GetComponent<Button> ();
-        buttonText = button.transform.GetChild (0).GetComponent<Text> ();
-        text = panel.GetComponent<Text> ();
-        cg = transform.GetChild (0).GetChild (0).GetComponent<CanvasGroup> ();
+        this.Inject();
+        Debug.Log("Dialog Renderer behaviour injected");
+        var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
+        var input = new StringReader(dialogAsset.text);
+        dialogs = deserializer.Deserialize<DialogsRoot>(input);
+        var panel = transform.GetChild(0).GetChild(0).GetChild(0);
+        button = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Button>();
+        buttonText = button.transform.GetChild(0).GetComponent<Text>();
+        text = panel.GetComponent<Text>();
+        cg = transform.GetChild(0).GetChild(0).GetComponent<CanvasGroup>();
         Alpha = 0;
     }
 
-    public float Alpha {
+    public float Alpha
+    {
         get { return cg.alpha; }
         set { cg.alpha = value; }
     }
 
-    public void RunDialog (string currentIsland)
+    public void RunDialog(string currentIsland, GameObject obj)
     {
-        var dialog = dialogs.Dialogs.FirstOrDefault (x => x.Id == currentIsland);
+        var dialog = dialogs.Dialogs.FirstOrDefault(x => x.Id == currentIsland);
         if (dialog == null)
-            throw new DialogMissingException (currentIsland);
-        Render (dialog);
+            throw new DialogMissingException(currentIsland);
+        Render(dialog, obj);
     }
 
-    private void Render (Dialog dialog)
+    private void Render(Dialog dialog, GameObject obj)
     {
-        DOTween.To (() => Alpha, x => Alpha = x, 1, 1f);
+        DOTween.To(() => Alpha, x => Alpha = x, 1, 1f);
 
-        button.onClick.RemoveAllListeners ();
-        if (dialog.ToBattle ?? true) {
+        button.onClick.RemoveAllListeners();
+        if (dialog.ToBattle ?? true)
+        {
             buttonText.text = "Perfrom the <b>Ritual</b>";
-            button.onClick.AddListener (() => Store.AdvanceState (Scenes.CardBattle));
-        } else {
+            button.onClick.AddListener(() => Store.AdvanceState(Scenes.CardBattle));
+        }
+        else {
             buttonText.text = "Continue";
-            button.onClick.AddListener (() => DOTween.To (() => Alpha, x => Alpha = x, 0, 1f));
+            Action callback = () =>
+            {
+                if (dialog.RemoveOnResolve ?? false)
+                {
+                    DestroyImmediate(obj);
+                }
+            };
+            button.onClick.AddListener(OnResolve(callback));
         }
 
         text.text = dialog.Description;
     }
 
+    private UnityEngine.Events.UnityAction OnResolve(Action callback)
+    {
+        return () => DOTween.To(() => Alpha, x => Alpha = x, 0, 1f).OnComplete(() => callback());
+    }
+
     public class DialogMissingException : Exception
     {
-        public DialogMissingException (string dialogKey) : base ("Missing dialog for " + dialogKey)
+        public DialogMissingException(string dialogKey) : base("Missing dialog for " + dialogKey)
         {
 
         }

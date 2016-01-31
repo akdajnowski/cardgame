@@ -22,5 +22,20 @@ dialogs:
    description: This is Singasteinn. The island is inhabited by dwarves. They promise to repair your ship if you help them get rid of giant lizard.
    toBattle: true
  - id: "Wreckage"
-   description: This is a wreckage.
+   description: |
+       [You see an old grizzled man floating on a remains of something which resembles a mast. The only difference from a regular one is that it looks like carved bone.]
+       
+       Man: Help me beyonder!
+       [Your crew throw a rope to the man]
+       
+       Thank yee beyonder, my name is Bjorn, I was the captain of the Nagflar
+       
+       We were on quest to defeat Níðhöggr, the lizard which is gnawing on the world tree.
+       But as you see we were unworthy in doing so.
+       
+       Wretched flying sea rats took our <b>ritual</b> artifacts to the nearby island.
+       If you follow them you will be able to retrieve them.
+       
+       Please beyonder! You need to help us to defeat the wretched fiend othewise all is lost.
    toBattle: false
+   removeOnResolve: true

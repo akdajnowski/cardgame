@@ -24,7 +24,7 @@ public class WorldEventPlaceBehaviour : MonoBehaviour
             visitedDictionary [islandKey] = true;
             Debug.Log ("We encountered: " + islandKey);
             Store.OverworldState.CurrentIsland = islandKey;
-            script.RunDialog (islandKey);
+            script.RunDialog (islandKey, gameObject);
         }
     }
 }
