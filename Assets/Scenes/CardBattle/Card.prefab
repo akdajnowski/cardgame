@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
+  CardAttrPrefab: {fileID: 22490834, guid: 93fec9d2679822944a15f78df0623ccc, type: 2}
 --- !u!114 &11474190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -881,6 +882,11 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CardAttrPrefab
+      value: 
+      objectReference: {fileID: 22490834, guid: 93fec9d2679822944a15f78df0623ccc,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100738}

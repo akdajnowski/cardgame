@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class CardAssetsProvider
 {
-    public Transform CardAttrPrefab { get; private set; }
     public List<Sprite> Icons { get; private set; }
 
-    public CardAssetsProvider()
+    public CardAssetsProvider ()
     {
-        Icons = AssetDatabase.LoadAllAssetRepresentationsAtPath("Assets/Scenes/CardBattle/icons.png").OfType<Sprite>().ToList();
-        CardAttrPrefab = (Transform)AssetDatabase.LoadAssetAtPath("Assets/Scenes/CardBattle/Card Description Icon.prefab", typeof(Transform));
+        Icons = Resources.LoadAll ("icons").OfType<Sprite> ().ToList ();
+        Icons.Add (Resources.Load<Sprite> ("mjornir"));
+        Debug.Log (Icons.Count.ToString ());
     }
 
-    public Sprite GetSpriteForAttribute(CardAttribute.Type type)
+    public Sprite GetSpriteForAttribute (CardAttribute.Type type)
     {
-        return Icons.First(x => x.name == CardAttribute.IconMap[type]);
+        return Icons.First (x => x.name == CardAttribute.IconMap [type]);
     }
 
-    public Sprite GetSpriteFromPath(string path)
+    public Sprite GetSpriteFromPath (string path)
     {
-        return Icons.First(x => x.name == path);
+        return Icons.First (x => x.name == path);
     }
 }
