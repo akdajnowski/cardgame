@@ -6,9 +6,6 @@ using System.Linq;
 
 public class CardRepository
 {
-    [Inject]
-    public GameStateStore gameStore;
-
     public static readonly int HandSize = 4;
     private readonly static Stack<CardDescriptor> _deck = new Stack<CardDescriptor> ();
     public readonly static List<CardDescriptor> Hand = new List<CardDescriptor> ();
@@ -18,7 +15,7 @@ public class CardRepository
         // to refactor
         if (_deck.Count == 0) {
             FillDeck ();
-            ShuffleDeck();
+            ShuffleDeck ();
         }
 
         var card = _deck.Pop ();
@@ -36,32 +33,29 @@ public class CardRepository
         cards.AddRange (GameStateStore.Instance.GetRandomCards (uncommon, CardDescriptor.CardRarity.Uncommon));
         cards.AddRange (GameStateStore.Instance.GetRandomCards (common, CardDescriptor.CardRarity.Common));
         
-        foreach (var card in cards)
-        {
-            _deck.Push(card);
+        foreach (var card in cards) {
+            _deck.Push (card);
         }
     }
 
-    public static void GetRareCardsFromOpponent(int number = 1)
+    public static void GetRareCardsFromOpponent (int number = 1)
     {
-        var cards = OpponentCardRepository.GetRareCards(number);
-        foreach (var card in cards)
-        {
-            _deck.Push(card);
+        var cards = OpponentCardRepository.GetRareCards (number);
+        foreach (var card in cards) {
+            _deck.Push (card);
         }
-        ShuffleDeck();
+        ShuffleDeck ();
     }
 
-    private static void ShuffleDeck()
+    private static void ShuffleDeck ()
     {
-        var cards = _deck.ToList();
-        System.Random r = new System.Random();
-        cards = cards.OrderBy(i => r.Next()).ToList();
+        var cards = _deck.ToList ();
+        System.Random r = new System.Random ();
+        cards = cards.OrderBy (i => r.Next ()).ToList ();
 
-        _deck.Clear();
-        foreach (var card in cards)
-        {
-            _deck.Push(card);
+        _deck.Clear ();
+        foreach (var card in cards) {
+            _deck.Push (card);
         }
     }
 }

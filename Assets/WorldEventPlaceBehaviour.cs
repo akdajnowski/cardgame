@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 using Adic;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent (typeof(Collider2D))]
 public class WorldEventPlaceBehaviour : MonoBehaviour
 {
     [Inject]
     public GameStateStore Store { get; set; }
 
-    [Inject("DialogRenderer")]
+    [Inject ("DialogRenderer")]
     public Transform dialogRenderer;
     private DialogRenderer script;
 
-    void Start() {
-        this.Inject();
-        script= dialogRenderer.GetComponent<DialogRenderer>();
+    void Start ()
+    {
+        this.Inject ();
+        Debug.Log ("World event behaviour injected");
+        script = dialogRenderer.GetComponent<DialogRenderer> ();
     }
 
-    void CollisionPerform(string islandKey)
+    void CollisionPerform (string islandKey)
     {
         var visitedDictionary = Store.OverworldState.VisitedIslands;
-        if (!visitedDictionary.ContainsKey(islandKey) || !visitedDictionary[islandKey])
-        {
-            visitedDictionary[islandKey] = true;
-            Debug.Log("We encountered: " + islandKey);
+        if (!visitedDictionary.ContainsKey (islandKey) || !visitedDictionary [islandKey]) {
+            visitedDictionary [islandKey] = true;
+            Debug.Log ("We encountered: " + islandKey);
             Store.OverworldState.CurrentIsland = islandKey;
-            script.RunDialog(islandKey);
+            script.RunDialog (islandKey);
         }
     }
 }

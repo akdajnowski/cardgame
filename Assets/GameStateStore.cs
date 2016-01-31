@@ -12,18 +12,18 @@ public class GameStateStore
     public OverworldState OverworldState { get; set; }
 
     public CardDeck CardDeck { get; set; }
-    
+
     public List<CardDescriptor> CardInformation;
 
     public static GameStateStore Instance {
         get {
-            if (_instance == null)
-            {
-                _instance = new GameStateStore
-                {
-                    OverworldState = new OverworldState(),
-                    CardDeck = new CardDeck()
+            if (_instance == null) {
+                Debug.Log ("KURWIX games tore");
+                _instance = new GameStateStore {
+                    OverworldState = new OverworldState (),
+                    CardDeck = new CardDeck ()
                 };
+                Debug.Log ("KURWIX games tore after");
             }
             return _instance;
         }
@@ -55,15 +55,14 @@ public class GameStateStore
         //throw new NotImplementedException();
     }
 
-    public List<CardDescriptor> GetRandomCards(int number, CardDescriptor.CardRarity rarity)
+    public List<CardDescriptor> GetRandomCards (int number, CardDescriptor.CardRarity rarity)
     {
-        var cards = new List<CardDescriptor>();
-        var rnd = new System.Random();
-        for (int i = 0; i < number; i++)
-        {
-            var cardsPool = CardInformation.Where(c => c.Rarity == rarity).ToList();
-            var idx = rnd.Next(0, cardsPool.Count() - 1);
-            cards.Add(cardsPool[idx]);
+        var cards = new List<CardDescriptor> ();
+        var rnd = new System.Random ();
+        for (int i = 0; i < number; i++) {
+            var cardsPool = CardInformation.Where (c => c.Rarity == rarity).ToList ();
+            var idx = rnd.Next (0, cardsPool.Count () - 1);
+            cards.Add (cardsPool [idx]);
         }
         return cards;
     }

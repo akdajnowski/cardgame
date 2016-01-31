@@ -3,25 +3,26 @@ using UnityEngine;
 
 public class GameRoot : ContextRoot
 {
-    public override void Init()
+    public override void Init ()
     {
     }
 
-    public override void SetupContainers()
+    public override void SetupContainers ()
     {
         //Add
-        var container = this.AddContainer<InjectionContainer>();
+        var container = this.AddContainer<InjectionContainer> ();
 
         //Register any extensions the container may use.
-        container.RegisterExtension<UnityBindingContainerExtension>()
-                .Bind<GameTracker>().ToSingleton()
-                .Bind<CardReducer>().ToSingleton()
-                .Bind<BattleHealthTracker>().ToSingleton()
-                .Bind<CursorApplier>().ToGameObjectWithTag("MainCamera")
-                .Bind<Transform>().ToGameObject("DialogRenderer").As("DialogRenderer")
-                .Bind<GameStateStore>().ToFactory<GlobalStateFactory>()
+        container.RegisterExtension<UnityBindingContainerExtension> ()
+                .Bind<GameStateStore> ().ToFactory<GlobalStateFactory> ()
+                .Bind<GameTracker> ().ToSingleton ()
+                .Bind<CardReducer> ().ToSingleton ()
+                .Bind<BattleHealthTracker> ().ToSingleton ()
+                .Bind<CursorApplier> ().ToGameObjectWithTag ("MainCamera")
+                .Bind<Transform> ().ToGameObject ("DialogRenderer").As ("DialogRenderer")
+                
 
-                .Bind<CardAssetsProvider>().ToSingleton();
+                .Bind<CardAssetsProvider> ().ToSingleton ();
 
         //Bind a Transform component to the two cubes on the scene, using a "As" condition
         //to define their identifiers.
