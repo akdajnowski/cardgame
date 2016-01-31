@@ -14,7 +14,6 @@ public class WorldEventPlaceBehaviour : MonoBehaviour
     void Start ()
     {
         this.Inject ();
-        Debug.Log ("World event behaviour injected");
         script = dialogRenderer.GetComponent<DialogRenderer> ();
     }
 
