@@ -368,6 +368,7 @@ public class HandBehaviour : MonoBehaviour
 
     private void HandleGameEnd()
     {
+
         var playerWon = healthTracker.PlayerHealth > 0;
         var winningGamer = playerWon ? "Player" : "Opponent";
         winningIndicatorPanel.GetComponent<CanvasGroup>().DOFade(1.0f, 0.5f);
@@ -381,7 +382,6 @@ public class HandBehaviour : MonoBehaviour
         {
             store.AdvanceState(Scenes.GameOver);
         }
-
     }
 
     private void BackToMap()
