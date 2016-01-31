@@ -100,7 +100,7 @@
     quantity: 1
 - name: Gunnar's Atgeir
   description: Gunnar's atgeir would make a ringing sound or "sing" when it was taken down in anticipation of bloodshed.
-  cardImage: icons_9
+  cardImage: spear
   rarity: Common
   cardAttributes:
   - quality: Attack
@@ -126,7 +126,7 @@
 # UNCOMMON (3-4 attributes)
 - name: Spear attack
   description: Keep your enemy at a distance.
-  cardImage: sword_diag
+  cardImage: spear
   rarity: Uncommon
   cardAttributes:
   - quality: Attack
@@ -251,7 +251,7 @@
     quantity: 3
 - name: Andvaranaut
   description: A magical ring capable of producing gold, first owned by Andvari.
-  cardImage: icons_6
+  cardImage: ring
   rarity: Uncommon
   cardAttributes:
   - quality: Attack
@@ -260,7 +260,7 @@
     quantity: 2
 - name: Draupnir
   description: A golden arm ring possessed by Odin. The ring was a source of endless wealth.
-  cardImage: icons_6
+  cardImage: ring
   rarity: Uncommon
   cardAttributes:
   - quality: MagicAttack
@@ -269,7 +269,7 @@
     quantity: 2
 - name: Svíagris
   description: Adils' prized ring in the Hrólfr Kraki's saga.
-  cardImage: icons_6
+  cardImage: ring
   rarity: Uncommon
   cardAttributes:
   - quality: MagicDefense

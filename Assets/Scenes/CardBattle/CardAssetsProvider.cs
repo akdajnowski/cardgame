@@ -10,7 +10,7 @@ public class CardAssetsProvider
     public CardAssetsProvider ()
     {
         Icons = Resources.LoadAll ("icons").OfType<Sprite> ().ToList ();
-        Icons.AddRange (LoadSprites ("mjornir", "arrow", "arrows", "sword_diag", "two_swords_diag", "mail", "shield"));
+        Icons.AddRange (LoadSprites ("mjornir", "arrow", "arrows", "sword_diag", "two_swords_diag", "mail", "shield", "spear", "ring"));
         Debug.Log (Icons.Count.ToString ());
     }
 
