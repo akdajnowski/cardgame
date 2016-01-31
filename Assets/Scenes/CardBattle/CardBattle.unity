@@ -715,12 +715,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Skirmishes in Naglfar are resolved in a card based game. Game is played
-    in turns. In each turn yourself and your opponent choose one card from a hand
-    and resolve process commerces. This process is to establish what type of damage
-    (divine, physical) will be dealt and if any healing will take place. Before playing
-    player must draw hsi first hand, during play after a card is chosen and resolved
-    hand will be filled automatically. Each card contains one on mroe attributes.
+  m_Text: <b>Rituals</b> in <b>Naglfar</b> are performed in a card based game. Game
+    is played in turns. In each turn yourself and your opponent choose one card from
+    a hand and resolve process commerces. This process is to establish what type of
+    damage (divine, physical) will be dealt and if any healing will take place. Before
+    playing player must draw hsi first hand, during play after a card is chosen and
+    resolved hand will be filled automatically. Each card contains one on mroe attributes.
     Each attribute correspond  to a feature (heal, divine damage, divine defence,
     physical damage, physical defence). Each type of defence protects agains one damage
     of related damage type. Each of the players start the skirmish with a llimited

@@ -368,11 +368,15 @@ public class HandBehaviour : MonoBehaviour
         if (playerWon) {
             CardRepository.GetRareCardsFromOpponent ();
             if (store.OverworldState.CurrentIsland == "Yggdrasil") {
+                store.OverworldState.CurrentIsland = null;
+                store.OverworldState.VisitedIslands.Clear ();
                 store.AdvanceState (Scenes.EndCredits);
             } else {
                 BackToMap ();
             }
         } else {
+            store.OverworldState.CurrentIsland = null;
+            store.OverworldState.VisitedIslands.Clear ();
             store.AdvanceState (Scenes.GameOver);
         }
     }
