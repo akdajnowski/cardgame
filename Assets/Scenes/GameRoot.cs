@@ -20,6 +20,11 @@ public class GameRoot : ContextRoot
                 .Bind<CardReducer>().ToSingleton()
                 .Bind<BattleHealthTracker>().ToSingleton()
                 .Bind<CursorApplier>().ToGameObjectWithTag("MainCamera")
+                .Bind<Transform>().ToGameObject("DialogRenderer").As("DialogRenderer").When(f =>
+                {
+                    Debug.Log(SceneManager.GetActiveScene().buildIndex + ":" + (int)Scenes.Overworld);
+                    return SceneManager.GetActiveScene().buildIndex == (int)Scenes.Overworld;
+                })
                 .Bind<CardAssetsProvider>().ToSingleton();
 
         //Bind a Transform component to the two cubes on the scene, using a "As" condition

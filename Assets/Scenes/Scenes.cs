@@ -11,7 +11,6 @@ public enum Scenes : int
 {
     Intro,
     MainMenu,
-    Dialog,
     Overworld,
     CardBattle,
     GameOver
