@@ -54,11 +54,11 @@ public class DialogRenderer : MonoBehaviour
 
     private void Render (Dialog dialog)
     {
-        DOTween.To(() => Alpha, x => Alpha = x, 1, 1f);
+        DOTween.To (() => Alpha, x => Alpha = x, 1, 1f);
 
         button.onClick.RemoveAllListeners ();
         if (dialog.ToBattle ?? true) {
-            buttonText.text = "Fight";
+            buttonText.text = "Perfrom the <b>Ritual</b>";
             button.onClick.AddListener (() => Store.AdvanceState (Scenes.CardBattle));
         } else {
             buttonText.text = "Continue";
